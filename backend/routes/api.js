@@ -11,9 +11,9 @@ routerApi.put('/users/:id', (req, res) => User.update(req, res));
 routerApi.delete('/users/:id', (req, res) => User.delete(req, res));
 
 // Route API pour les amis
-routerApi.post('/users/:id/friends/:id', (req, res) => User.create(req, res));
-routerApi.get('/users/:id/friends', (req, res) => User.create(req, res));
-routerApi.delete('/users/:id/friends/:id', (req, res) => User.create(req, res));
+routerApi.post('/friends/:id', (req, res) => User.addFriend(req, res));
+routerApi.get('/friends/:id', (req, res) => User.getFriends(req, res));
+routerApi.delete('/friends/:id', (req, res) => User.removeFriend(req, res));
 
 // Route API pour les allergies
 routerApi.post('/users/:id/allergies/:id', (req, res) => User.create(req, res));
