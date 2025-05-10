@@ -1,4 +1,6 @@
 const RecetteModel = require('../models/recetteModel');
+const AlimentModel = require('../models/alimentModel');
+const FoodRecipeModel = require('../models/recette_alimentModel');
 
 class Recipe {
   // Créer une recette
@@ -62,6 +64,56 @@ class Recipe {
     const deleted = await RecetteModel.findByIdAndDelete(id);
     if (!deleted) return res.status(404).json({ error: 'Recette non trouvée' });
     res.json({ message: 'Recette supprimée' });
+  }
+
+  // -------------------------------------
+  // Aliments liés à une recette
+  // --------------------------------------
+
+  async addFood(req, res) {
+    const { id } = req.params;
+    const { foodId } = req.body;
+
+    const recette = await RecetteModel.findById(id);
+    if (!recette) return res.status(404).json({ error: 'Recette non trouvée' });
+
+    const food = await AlimentModel.findById(foodId);
+    if (!food) return res.status(404).json({ error: 'Aliment non trouvé' });
+
+    try {
+      const link = await FoodRecipeModel.create({ recipe: id, food: foodId });
+      res.status(201).json(link);
+    } catch (err) {
+      if (err.code === 11000) {
+        return res.status(400).json({ error: 'Cet aliment est déjà lié à la recette' });
+      }
+      res.status(500).json({ error: 'Erreur lors de l\'association' });
+    }
+  }
+
+  // 📋 Obtenir les aliments liés à une recette
+  async getFoods(req, res) {
+    const { id } = req.params;
+
+    const recette = await RecetteModel.findById(id);
+    if (!recette) return res.status(404).json({ error: 'Recette non trouvée' });
+
+    const links = await FoodRecipeModel.find({ recipe: id }).populate('food');
+    const aliments = links.map(link => link.food);
+
+    res.json(aliments);
+  }
+
+  // ❌ Supprimer un aliment d'une recette
+  async removeFood(req, res) {
+    const { id, foodId } = req.params;
+
+    const deleted = await FoodRecipeModel.findOneAndDelete({ recipe: id, food: foodId });
+    if (!deleted) {
+      return res.status(404).json({ error: 'Association recette-aliment introuvable' });
+    }
+
+    res.json({ message: 'Aliment retiré de la recette' });
   }
 }
 

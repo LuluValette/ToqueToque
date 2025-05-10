@@ -1,4 +1,6 @@
 const AlimentModel = require('../models/alimentModel');
+const AllergieModel = require('../models/allergieModel');
+const AlimentAllergyModel = require('../models/aliment_allergieModel');
 
 class Food {
   // Créer un nouvel aliment
@@ -68,6 +70,70 @@ class Food {
     const deleted = await AlimentModel.findByIdAndDelete(id);
     if (!deleted) return res.status(404).json({ error: 'Aliment non trouvé' });
     res.json({ message: 'Aliment supprimé' });
+  }
+
+  // --------------------------------------------------------------
+  // Routes API pour les recettes
+  // --------------------------------------------------------------
+
+  async getRecipes(req, res) {
+    const { id } = req.params;
+
+    const food = await AlimentModel.findById(id);
+    if (!food) return res.status(404).json({ error: 'Aliment non trouvé' });
+
+    const links = await FoodRecipeModel.find({ food: id }).populate('recipe');
+    const recipes = links.map(link => link.recipe);
+
+    res.json(recipes);
+  }
+
+  // --------------------------------------------------------------
+  // Routes API pour les allergies
+  // --------------------------------------------------------------
+
+  async assignAllergie(req, res) {
+    const { id } = req.params;
+    const { allergyId } = req.body;
+
+    const food = await AlimentModel.findById(id);
+    if (!food) return res.status(404).json({ error: 'Aliment non trouvé' });
+
+    const allergie = await AllergieModel.findById(allergyId);
+    if (!allergie) return res.status(404).json({ error: 'Allergie non trouvée' });
+
+    try {
+      const entry = await AlimentAllergyModel.create({ food: id, allergie: allergyId });
+      res.status(201).json(entry);
+    } catch (err) {
+      if (err.code === 11000) {
+        return res.status(400).json({ error: 'Allergie déjà liée à cet aliment' });
+      }
+      res.status(500).json({ error: 'Erreur lors de l\'association' });
+    }
+  }
+
+  async getAllergie(req, res) {
+    const { id } = req.params;
+
+    const food = await AlimentModel.findById(id);
+    if (!food) return res.status(404).json({ error: 'Aliment non trouvé' });
+
+    const links = await AlimentAllergyModel.find({ food: id }).populate('allergie');
+    const allergies = links.map(link => link.allergie);
+
+    res.json(allergies);
+  }
+
+  async deleteAllergie(req, res) {
+    const { id, allergyId } = req.params;
+
+    const deleted = await AlimentAllergyModel.findOneAndDelete({ food: id, allergie: allergyId });
+    if (!deleted) {
+      return res.status(404).json({ error: 'Relation allergie-aliment introuvable' });
+    }
+
+    res.json({ message: 'Allergie retirée de l\'aliment' });
   }
 }
 

@@ -42,15 +42,13 @@ routerApi.get('/foods/:id', (req, res) => Food.get(req, res));
 routerApi.put('/foods/:id', (req, res) => Food.update(req, res));
 routerApi.delete('/foods/:id', (req, res) => Food.delete(req, res));
 
-// Route API pour les aliments d'une recette
-routerApi.post('/foods/:id/recipes', (req, res) => User.create(req, res));
-routerApi.get('/foods/:id/recipes', (req, res) => User.create(req, res));
-routerApi.delete('/foods/:id/recipes/:id', (req, res) => User.create(req, res));
+// Route API pour les recettes liees à un aliment
+routerApi.get('/foods/:id/recipes', (req, res) => Food.getRecipes(req, res));
 
 // Route API pour les aliments d'une alergie
-routerApi.post('/foods/:id/allergies', (req, res) => User.create(req, res));
-routerApi.get('/foods/:id/allergies', (req, res) => User.create(req, res));
-routerApi.delete('/foods/:id/allergies/:id', (req, res) => User.create(req, res));
+routerApi.post('/foods/:id/allergie', (req, res) => Food.assignAllergie(req, res));
+routerApi.get('/foods/:id/allergies', (req, res) => Food.getAllergie(req, res));
+routerApi.delete('/foods/:id/allergie/:allergyId', (req, res) => Food.deleteAllergie(req, res));
 
 // -----------------------------------------------------------
 // Routes API pour les alergies
@@ -77,8 +75,8 @@ routerApi.put('/recipes/:id', (req, res) => Recipe.update(req, res));
 routerApi.delete('/recipes/:id', (req, res) => Recipe.delete(req, res));
 
 // Route API pour les recettes d'un aliment
-routerApi.post('/recipes/:id/foods', (req, res) => Recipe.create(req, res));
-routerApi.get('/recipes/:id/foods', (req, res) => Recipe.create(req, res));
-routerApi.delete('/recipes/:id/foods/:id', (req, res) => Recipe.create(req, res));
+routerApi.post('/recipes/:id/foods', (req, res) => Recipe.addFood(req, res));
+routerApi.get('/recipes/:id/foods', (req, res) => Recipe.getFoods(req, res));
+routerApi.delete('/recipes/:id/foods/:foodId', (req, res) => Recipe.removeFood(req, res));
 
 module.exports = routerApi;
