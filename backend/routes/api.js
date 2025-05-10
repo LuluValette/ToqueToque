@@ -1,6 +1,7 @@
 const express = require('express');
 const routerApi = express.Router();
 const User = require('../app/user');
+const Allergie = require('../app/allergie');
 
 // -----------------------------------------------------------
 // Routes API pour les utilisateurs
@@ -16,9 +17,9 @@ routerApi.get('/friends/:id', (req, res) => User.getFriends(req, res));
 routerApi.delete('/friends/:id', (req, res) => User.removeFriend(req, res));
 
 // Route API pour les allergies
-routerApi.post('/users/:id/allergies/:id', (req, res) => User.create(req, res));
-routerApi.get('/users/:id/allergies', (req, res) => User.create(req, res));
-routerApi.delete('/users/:id/allergies/:id', (req, res) => User.create(req, res));
+routerApi.post('/users/:id/allergies/:allergyId', (req, res) => User.addAllergie(req, res));
+routerApi.get('/users/:id/allergies', (req, res) => User.getAllergie(req, res));
+routerApi.delete('/users/:id/allergies/:allergyId', (req, res) => User.deleteAllergie(req, res));
 
 // -----------------------------------------------------------
 // Routes API pour les parties
@@ -51,11 +52,11 @@ routerApi.delete('/foods/:id/allergies/:id', (req, res) => User.create(req, res)
 
 // -----------------------------------------------------------
 // Routes API pour les alergies
-routerApi.post('/allergies', (req, res) => User.create(req, res));
-routerApi.get('/allergies', (req, res) => User.list(req, res));
-routerApi.get('/allergies/:id', (req, res) => User.get(req, res));
-routerApi.put('/allergies/:id', (req, res) => User.update(req, res));
-routerApi.delete('/allergies/:id', (req, res) => User.delete(req, res));
+routerApi.post('/allergies', (req, res) => Allergie.create(req, res));
+routerApi.get('/allergies', (req, res) => Allergie.list(req, res));
+routerApi.get('/allergies/:id', (req, res) => Allergie.get(req, res));
+routerApi.put('/allergies/:id', (req, res) => Allergie.update(req, res));
+routerApi.delete('/allergies/:id', (req, res) => Allergie.delete(req, res));
 
 // -----------------------------------------------------------
 // Routes API pour les amitiés

@@ -1,5 +1,7 @@
 const UserModel = require('../models/userModel');
 const FriendModel = require('../models/friendModel');
+const AllergieModel = require('../models/allergieModel');
+const UserAllergieModel = require('../models/user_allergie');
 
 class User {
   async create(req, res) {
@@ -36,6 +38,10 @@ class User {
     await UserModel.findByIdAndDelete(id);
     res.json({ message: 'Utilisateur supprimé' });
   }
+
+  // --------------------------------------------------------------
+  // Routes API pour les amis
+  // --------------------------------------------------------------
 
   async addFriend(req, res) {
     const { id } = req.params; // l'utilisateur qui envoie la demande
@@ -116,6 +122,62 @@ class User {
   
     res.json({ message: 'Amitié supprimée' });
   }
+
+  // Fonction pour accepter une demande d'ami
+  // Fonction pour bloquer un utilisateur
+  // Fonction pour voir les demandes d'amis en attente
+
+  // --------------------------------------------------------------
+  // Routes API pour les allergies
+  // --------------------------------------------------------------
+
+  async addAllergie(req, res) {
+    const { id, allergyId } = req.params;
+  
+    const user = await UserModel.findById(id);
+    if (!user) return res.status(404).json({ error: 'Utilisateur non trouvé' });
+  
+    const allergie = await AllergieModel.findById(allergyId);
+    if (!allergie) return res.status(404).json({ error: 'Allergie non trouvée' });
+  
+    try {
+      const entry = await UserAllergieModel.create({ user: id, allergie: allergyId });
+      res.status(201).json(entry);
+    } catch (err) {
+      if (err.code === 11000) {
+        return res.status(400).json({ error: 'Allergie déjà associée à cet utilisateur' });
+      }
+      res.status(500).json({ error: 'Erreur lors de l\'ajout' });
+    }
+  }
+
+  async getAllergie(req, res) {
+    const { id } = req.params;
+  
+    const user = await UserModel.findById(id);
+    if (!user) return res.status(404).json({ error: 'Utilisateur non trouvé' });
+  
+    const allergies = await UserAllergieModel.find({ user: id }).populate('allergie', 'name');
+    
+    // Ne retourne que les noms ou objets allergies
+    res.json(allergies.map(entry => entry.allergie));
+  }
+  
+  async deleteAllergie(req, res) {
+    const { id, allergyId } = req.params;
+  
+    const deleted = await UserAllergieModel.findOneAndDelete({
+      user: id,
+      allergie: allergyId
+    });
+  
+    if (!deleted) {
+      return res.status(404).json({ error: 'Relation utilisateur-allergie introuvable' });
+    }
+  
+    res.json({ message: 'Allergie supprimée pour cet utilisateur' });
+  }
+  
     
 }
 
