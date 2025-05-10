@@ -2,6 +2,7 @@ const express = require('express');
 const routerApi = express.Router();
 const User = require('../app/user');
 const Allergie = require('../app/allergie');
+const Food = require('../app/aliment');
 
 // -----------------------------------------------------------
 // Routes API pour les utilisateurs
@@ -34,11 +35,11 @@ routerApi.post('/games/:id/users', (req, res) => User.create(req, res));
 
 // -----------------------------------------------------------
 // Routes API pour les aliments
-routerApi.post('/foods', (req, res) => User.create(req, res));
-routerApi.get('/foods', (req, res) => User.list(req, res));
-routerApi.get('/foods/:id', (req, res) => User.get(req, res));
-routerApi.put('/foods/:id', (req, res) => User.update(req, res));
-routerApi.delete('/foods/:id', (req, res) => User.delete(req, res));
+routerApi.post('/foods', (req, res) => Food.create(req, res));
+routerApi.get('/foods', (req, res) => Food.list(req, res));
+routerApi.get('/foods/:id', (req, res) => Food.get(req, res));
+routerApi.put('/foods/:id', (req, res) => Food.update(req, res));
+routerApi.delete('/foods/:id', (req, res) => Food.delete(req, res));
 
 // Route API pour les aliments d'une recette
 routerApi.post('/foods/:id/recipes', (req, res) => User.create(req, res));
