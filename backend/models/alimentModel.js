@@ -13,7 +13,7 @@ const alimentSchema = new mongoose.Schema({
     default: 'autre'
   },
   image: {
-    type: String, // URL ou nom de fichier si uploadé localement
+    type: String,
     default: null
   },
   createdAt: {

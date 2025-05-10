@@ -3,6 +3,7 @@ const routerApi = express.Router();
 const User = require('../app/user');
 const Allergie = require('../app/allergie');
 const Food = require('../app/aliment');
+const Recipe = require('../app/recipe');
 
 // -----------------------------------------------------------
 // Routes API pour les utilisateurs
@@ -69,15 +70,15 @@ routerApi.delete('/friendships/:id', (req, res) => User.delete(req, res));
 
 // -----------------------------------------------------------
 // Routes API pour les recettes
-routerApi.post('/recipes', (req, res) => User.create(req, res));
-routerApi.get('/recipes', (req, res) => User.list(req, res));
-routerApi.get('/recipes/:id', (req, res) => User.get(req, res));
-routerApi.put('/recipes/:id', (req, res) => User.update(req, res));
-routerApi.delete('/recipes/:id', (req, res) => User.delete(req, res));
+routerApi.post('/recipes', (req, res) => Recipe.create(req, res));
+routerApi.get('/recipes', (req, res) => Recipe.list(req, res));
+routerApi.get('/recipes/:id', (req, res) => Recipe.get(req, res));
+routerApi.put('/recipes/:id', (req, res) => Recipe.update(req, res));
+routerApi.delete('/recipes/:id', (req, res) => Recipe.delete(req, res));
 
 // Route API pour les recettes d'un aliment
-routerApi.post('/recipes/:id/foods', (req, res) => User.create(req, res));
-routerApi.get('/recipes/:id/foods', (req, res) => User.create(req, res));
-routerApi.delete('/recipes/:id/foods/:id', (req, res) => User.create(req, res));
+routerApi.post('/recipes/:id/foods', (req, res) => Recipe.create(req, res));
+routerApi.get('/recipes/:id/foods', (req, res) => Recipe.create(req, res));
+routerApi.delete('/recipes/:id/foods/:id', (req, res) => Recipe.create(req, res));
 
 module.exports = routerApi;
