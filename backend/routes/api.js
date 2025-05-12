@@ -4,6 +4,7 @@ const User = require('../app/user');
 const Allergie = require('../app/allergie');
 const Food = require('../app/aliment');
 const Recipe = require('../app/recipe');
+const Partie = require('../app/partie');
 
 // -----------------------------------------------------------
 // Routes API pour les utilisateurs
@@ -25,14 +26,17 @@ routerApi.delete('/users/:id/allergies/:allergyId', (req, res) => User.deleteAll
 
 // -----------------------------------------------------------
 // Routes API pour les parties
-routerApi.post('/games', (req, res) => User.create(req, res));
-routerApi.get('/games', (req, res) => User.list(req, res));
-routerApi.get('/games/:id', (req, res) => User.get(req, res));
-routerApi.put('/games/:id', (req, res) => User.update(req, res));
-routerApi.delete('/games/:id', (req, res) => User.delete(req, res));
+routerApi.post('/parties', (req, res) => Partie.create(req, res));
+routerApi.get('/parties/:id', (req, res) => Partie.getOne(req, res));
+routerApi.get('/parties', (req, res) => Partie.getAll(req, res));
 
 // Route API pour les utilisateurs d'une partie
-routerApi.post('/games/:id/users', (req, res) => User.create(req, res));
+routerApi.post('/parties/:id/join', (req, res) => Partie.addPlayer(req, res));
+routerApi.get('/parties/:id/users', (req, res) => Partie.getUsers(req, res));
+
+// Route API pour les notations
+routerApi.post('/parties/:id/notations', (req, res) => Partie.addNotation(req, res));
+routerApi.get('/parties/:id/notations', (req, res) => Partie.getNotations(req, res));
 
 // -----------------------------------------------------------
 // Routes API pour les aliments
