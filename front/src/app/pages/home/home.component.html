@@ -9,13 +9,4 @@
         
     <app-recette></app-recette>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    <app-card-simple
-        *ngFor="let r of recettes"
-        [title]="r.title"
-        [link]="['/recettes', r._id]">
-    </app-card-simple>
-    </div>
-
-
 </div>

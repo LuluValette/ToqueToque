@@ -17,15 +17,5 @@ import { filter } from 'rxjs/operators';
 })
 
 export class AppComponent {
-  constructor(public router: Router) {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-    });
-  }
   title = 'toquetoque';
-
-  ngOnInit() {
-    console.log('AppComponent INIT');
-  }
 }
