@@ -1,0 +1,19 @@
+<a
+  class="flex w-full items-center bg-[var(--secondary-color)] text-[var(--background-color)] font-bold rounded-[12px] px-8 py-3 shadow-[6px_6px_10px_var(--third-color)]"
+  style="background-color: var(--secondary-color); color: var(--background-color);"
+  [routerLink]="link"
+>
+  <!-- Avatar parfaitement carré et centré -->
+  <div class="w-16 h-16 flex-shrink-0 rounded-full bg-[var(--thirdary-color)] flex items-center justify-center overflow-hidden">
+    <img
+      src="{{ image }}"
+      alt="Icône"
+      class="w-full h-full object-cover"
+    />
+  </div>
+
+  <!-- Texte centré -->
+  <div class="text-center w-full font-bold text-xl">
+    {{ title }}
+  </div>
+</a>

@@ -1,12 +1,31 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterModule, NavigationEnd } from '@angular/router';
+import { HeaderComponent } from './components/header/header.component';
+import { Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [
+    RouterOutlet,
+    RouterModule,
+    HeaderComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
+
 export class AppComponent {
-  title = 'front';
+  constructor(public router: Router) {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+    });
+  }
+  title = 'toquetoque';
+
+  ngOnInit() {
+    console.log('AppComponent INIT');
+  }
 }

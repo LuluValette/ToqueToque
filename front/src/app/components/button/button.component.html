@@ -1,0 +1,14 @@
+<!-- 🔁 Si un lien est fourni -->
+<a *ngIf="link"
+   [routerLink]="link"
+   [ngClass]="colorClasses + ' ' + sizeClasses"
+   class="inline-block no-underline text-center">
+  {{ label }}
+</a>
+
+<!-- 🔘 Sinon, c’est un bouton normal -->
+<button *ngIf="!link"
+        (click)="handleClick()"
+        [ngClass]="colorClasses + ' ' + sizeClasses">
+  {{ label }}
+</button>

@@ -1,0 +1,33 @@
+<div
+  class="flex items-center bg-[var(--secondary-color)] text-[var(--background-color)] font-bold rounded-[12px] px-6 py-3 shadow-[6px_6px_10px_var(--third-color)]"
+  style="background-color: var(--secondary-color); color: var(--background-color);"
+>
+  <!-- Bloc avatar (cercle + image) -->
+  <div class="relative w-16 h-16 flex-shrink-0">
+    <!-- Avatar rond -->
+    <div class="w-full h-full rounded-full bg-[var(--thirdary-color)] flex items-center justify-center overflow-hidden">
+      <img
+        src="{{ image }}"
+        alt="Icône"
+        class="w-full h-full object-cover"
+      />
+    </div>
+
+    <!-- Badge au-dessus (en-dehors du cercle) -->
+    <div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-white shadow border border-white flex items-center justify-center">
+      <img
+        src="{{ tiny_icon}}"
+        alt="badge"
+        class="w-full h-full object-contain"
+      />
+    </div>
+  </div>
+
+  <!-- Titre -->
+  <div class="text-center w-full font-bold text-xl px-4">
+    {{ title }}
+  </div>
+
+  <!-- Bouton -->
+  <app-button label="Ajouter" color="primary" size="small"></app-button>
+</div>

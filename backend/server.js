@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const apiRoutes = require('./routes/api');
+const cors = require('cors');
 const mongoose = require('mongoose');
 
 const app = express();
@@ -15,6 +16,9 @@ mongoose.connect('mongodb://admin:admin@localhost:27017/ToqueToque?authSource=ad
 
 // Middleware JSON pour les API
 app.use(express.json());
+
+// Middleware CORS
+app.use(cors());
 
 // Routes API → toutes les routes sous /api
 app.use('/api', apiRoutes);

@@ -1,0 +1,12 @@
+<div *ngIf="recette">
+  <app-text text="{{ recette.title }}"></app-text>
+  <app-text text="Il est l’heure d’acheter les ingrédients pour la recette de tomates farcies !"></app-text>
+
+  <ul class="list-disc pl-6">
+    <li *ngFor="let ingredient of ingredients">
+      <app-text text="{{ ingredient.name }}"></app-text>
+    </li>
+  </ul>
+
+  <app-button label="Lancer une partie" color="primary" size="small" link="/recettes/preparation/{{ recette._id}}"></app-button>
+</div>

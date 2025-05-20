@@ -8,6 +8,11 @@ Ce projet scolaire a pour objectif la création d'une application web pour mobil
 Commande pour lancer l'application backend
 ```bash
 # Lancer l'api
-node ./backend/serveur.js
+node ./backend/server.js
+
+# Crée un service
+ng generate service services/recette
+
+ng generate component compnents/card_with_picture
 
 ```
