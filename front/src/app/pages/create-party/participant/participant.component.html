@@ -1,0 +1,24 @@
+<div>
+  <app-text text="Il est temps de choisir les participants !" size="large"></app-text>
+  <ul>
+    <li *ngFor="let participant of participants">
+      <app-card-with-button
+        *ngIf="participant.role === 'invité'"
+        [title]="getUserName(participant.userId)"
+        image=""
+        [buttonLabel]="'Retirer'"
+        [buttonColor]="'danger'"
+        [buttonSize]="'small'"
+      ></app-card-with-button>
+
+      <app-card-with-tiny-icon
+        *ngIf="participant.role === 'cuisinier'"
+        [title]="getUserName(participant.userId)"
+        image=""
+        [buttonLabel]="'Retirer'"
+        [buttonColor]="'danger'"
+        [buttonSize]="'small'"
+      ></app-card-with-tiny-icon>
+    </li>
+  </ul>
+</div>

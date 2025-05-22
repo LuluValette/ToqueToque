@@ -1,12 +1,12 @@
 <div class="flex flex-col items-center justify-center h-[50%] gap-4">
-    <app-button label="Lancer une partie" color="primary" size="large" link="/create-party"></app-button>
+    <app-button label="Lancer une partie" color="primary" size="large" (clicked)="createParty()" ></app-button>
     <app-button label="Liste des recettes" color="secondary" size="medium" link="/recettes"></app-button>
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
     <h2 class="text-2xl font-bold text-center">Recettes</h2>
-        
+
     <app-recette></app-recette>
 
 </div>

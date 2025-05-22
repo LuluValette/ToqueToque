@@ -4,6 +4,7 @@ import { TextComponent } from '../../../components/text/text.component';
 import { ButtonComponent } from '../../../components/button/button.component';
 import { PartieBuilderService } from '../../../services/partie-builder.service';
 import { Router } from '@angular/router';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-info',
@@ -18,10 +19,12 @@ import { Router } from '@angular/router';
 export class InfoComponent {
   @Input() date: string = "";
   @Input() heure: string = "";
+  user: any = null;
 
-  constructor(private partieBuilder: PartieBuilderService, private router: Router) {}
+  constructor(private auth: AuthService, private partieBuilder: PartieBuilderService, private router: Router) {}
 
   ngOnInit() {
+    this.user = this.auth.getUser();
     this.date = this.partieBuilder.get('date');
     this.heure = this.partieBuilder.get('heure');
 
@@ -38,6 +41,6 @@ export class InfoComponent {
     this.partieBuilder.set('heure', this.heure);
 
     // On redirige vers la page suivante
-    this.router.navigate(['/create-party/role']);
+    this.router.navigate(['/create-party/role', this.user._id]);
   }
 }

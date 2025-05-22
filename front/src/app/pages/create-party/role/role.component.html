@@ -1,5 +1,5 @@
 <app-text text="{{ question }}" size="large"></app-text>
 
-<app-button label="Non" color="secondary" size="medium" link="/create-party/role"></app-button>
+<app-button label="Non" color="secondary" size="medium" (clicked)="addParticipant('invité')"></app-button>
 
-<app-button label="Oui" color="primary" size="medium" link="/create-party/role"></app-button>
+<app-button label="Oui" color="primary" size="medium" (clicked)="addParticipant('cuisinier')"></app-button>

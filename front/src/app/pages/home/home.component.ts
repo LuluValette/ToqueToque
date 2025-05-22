@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../.././components/button/button.component';
 import { RecetteComponent } from '../.././components/recette/recette.component';
-import { RecetteService } from '../../services/recette.service';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,5 +16,23 @@ import { RecetteService } from '../../services/recette.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  isConnected = false;
+  user: any = null;
 
+  constructor(private auth: AuthService, private router: Router) {}
+
+  ngOnInit() {
+    this.user = this.auth.getUser();
+    if (this.user) {
+      alert("Vous êtes déjà connecté");
+    }
+  }
+
+  createParty() {
+    if (!this.user) {
+      alert("Vous devez être connecté pour créer une partie");
+    }
+    // On redirige vers la page suivante
+    this.router.navigate(['/create-party']);
+  }
 }

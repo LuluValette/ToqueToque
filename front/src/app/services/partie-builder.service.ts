@@ -37,4 +37,8 @@ export class PartieBuilderService {
       ingredients: [],
     };
   }
+
+  addParticipant(userId: string, role: string) {
+    this.partieData.participants.push({ userId, role });
+  }
 }

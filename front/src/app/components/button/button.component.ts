@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '../../services/api.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -15,11 +14,11 @@ import { RouterModule } from '@angular/router';
 })
 export class ButtonComponent {
   @Input() label: string = 'Click Me';
-  @Input() color: 'primary' | 'secondary' | 'danger' = 'primary';
-  @Input() size: 'small' | 'medium' | 'large' = 'medium';
+  @Input() color: string = 'primary'; // 'primary' | 'secondary' | 'danger'
+  @Input() size: string = 'medium'; // 'small' | 'medium' | 'large'
   @Input() link: string | null = null;
 
-  constructor(private api: ApiService) {}
+  constructor() {}
 
   @Output() clicked = new EventEmitter<void>();
 

@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../../components/button/button.component';
 
 @Component({
@@ -10,4 +11,14 @@ import { ButtonComponent } from '../../../components/button/button.component';
 export class CardWithButtonComponent {
   @Input() image: String = '/picture/user-icon.png';
   @Input() title: String = '';
+
+  @Input() buttonLabel: string = 'Valider';
+  @Input() buttonColor: string = 'primary';
+  @Input() buttonSize: string = 'medium';
+
+  @Output() buttonClicked = new EventEmitter<void>();
+
+  onClick(): void {
+    this.buttonClicked.emit();
+  }
 }

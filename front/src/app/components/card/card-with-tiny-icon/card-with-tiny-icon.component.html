@@ -29,5 +29,10 @@
   </div>
 
   <!-- Bouton -->
-  <app-button label="Ajouter" color="primary" size="small"></app-button>
+  <app-button
+    [label]="buttonLabel"
+    [color]="buttonColor"
+    [size]="buttonSize"
+    (clicked)="onClick()"
+  ></app-button>
 </div>
