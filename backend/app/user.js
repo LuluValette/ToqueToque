@@ -39,6 +39,26 @@ class User {
     res.json({ message: 'Utilisateur supprimé' });
   }
 
+    async login(req, res) {
+      const { phone, password } = req.body;
+
+      const user = await UserModel.findOne({ phone });
+
+      if (!user) {
+        return res.status(404).json({ error: 'Utilisateur non trouvé' });
+      }
+
+      if (user.password !== password) {
+        return res.status(401).json({ error: 'Mot de passe incorrect' });
+      }
+
+      res.json({
+        _id: user._id,
+        name: user.name,
+        phone: user.phone,
+      });
+    }
+
   // --------------------------------------------------------------
   // Routes API pour les amis
   // --------------------------------------------------------------

@@ -14,6 +14,8 @@ routerApi.get('/users/:id', (req, res) => User.get(req, res));
 routerApi.put('/users/:id', (req, res) => User.update(req, res));
 routerApi.delete('/users/:id', (req, res) => User.delete(req, res));
 
+routerApi.post('/auth/login', async (req, res) => User.login(req, res));
+
 // Route API pour les amis
 routerApi.post('/friends/:id', (req, res) => User.addFriend(req, res));
 routerApi.get('/friends/:id', (req, res) => User.getFriends(req, res));
