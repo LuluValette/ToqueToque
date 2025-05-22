@@ -19,7 +19,6 @@ export class ButtonComponent {
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
   @Input() link: string | null = null;
 
-
   constructor(private api: ApiService) {}
 
   @Output() clicked = new EventEmitter<void>();

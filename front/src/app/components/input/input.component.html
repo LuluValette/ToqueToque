@@ -1,0 +1,18 @@
+<div
+  class="flex items-center justify-between gap-4 p-4 rounded-[20px]"
+  style="background-color: var(--primary-color);"
+>
+  <!-- Label + étoile -->
+  <label class="text-lg font-bold flex items-center text-[var(--text-color)]">
+    {{ label }} :
+    <span *ngIf="required" class="text-red-600 text-2xl px-2 leading-none">*</span>
+  </label>
+
+  <!-- Input -->
+  <input
+    [(ngModel)]="value"
+    (ngModelChange)="valueChange.emit($event)"
+    class="rounded-[12px] px-4 py-2 w-full max-w-sm border border-black outline-none"
+    style="background-color: var(--background-color); color: var(--text-color);"
+  />
+</div>

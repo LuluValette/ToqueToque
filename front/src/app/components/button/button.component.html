@@ -9,6 +9,7 @@
 <!-- 🔘 Sinon, c’est un bouton normal -->
 <button *ngIf="!link"
         (click)="handleClick()"
-        [ngClass]="colorClasses + ' ' + sizeClasses">
+        [ngClass]="colorClasses + ' ' + sizeClasses"
+        class="inline-block no-underline text-center">
   {{ label }}
 </button>

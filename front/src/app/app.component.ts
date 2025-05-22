@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterModule, NavigationEnd } from '@angular/router';
+import { RouterOutlet, RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
-import { Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',

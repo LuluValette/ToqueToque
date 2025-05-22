@@ -1,0 +1,10 @@
+<app-text text="Bienvenue dans le créateur de parties" size="large"></app-text>
+
+<app-text text="Tu vas pouvoir créer et gérer une partie de cuisine entre amis !"></app-text>
+
+<app-text label="Quand veux tu faire cette partie ?"></app-text>
+
+<app-input label="Date" [(value)]="date"></app-input>
+<app-input label="Heure" [(value)]="heure"></app-input>
+
+<app-button label="Suivant" color="primary" size="medium" (clicked)="nextStep()"></app-button>
