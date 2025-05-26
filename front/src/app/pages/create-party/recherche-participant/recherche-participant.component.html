@@ -1,0 +1,33 @@
+<div class="p-4 flex flex-col gap-6 items-center">
+
+  <!-- Titre principal -->
+  <app-text text="Liste des amis" size="large"></app-text>
+
+  <!-- Bouton d'invitation -->
+  <app-button
+    label="Envoyer une invitation"
+    color="primary"
+    size="small"
+  ></app-button>
+
+  <!-- Champ de recherche -->
+  <div class="w-full max-w-md p-4 rounded-xl ">
+    <app-input label="Chercher un ami"></app-input>
+  </div>
+
+  <!-- Titre suggestions -->
+  <app-text text="Suggestions" size="large"></app-text>
+
+  <!-- Liste des suggestions -->
+  <div class="w-full max-w-md flex flex-col gap-4">
+    <app-card-with-button
+      *ngFor="let friend of filteredFriends"
+      [title]="friend.name"
+      [buttonLabel]="'Ajouter'"
+      [buttonColor]="'primary'"
+      [buttonSize]="'small'"
+      (buttonClicked)="addFriend(friend)"
+    ></app-card-with-button>
+  </div>
+
+</div>

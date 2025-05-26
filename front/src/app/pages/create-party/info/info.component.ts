@@ -24,6 +24,7 @@ export class InfoComponent {
   constructor(private auth: AuthService, private partieBuilder: PartieBuilderService, private router: Router) {}
 
   ngOnInit() {
+    this.partieBuilder.checkInitiatorOrRedirect();
     this.user = this.auth.getUser();
     this.date = this.partieBuilder.get('date');
     this.heure = this.partieBuilder.get('heure');

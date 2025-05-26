@@ -1,0 +1,26 @@
+<app-text
+  text="Il est maintenant temps de choisir les aliments imposés !"
+  size="large"
+></app-text>
+
+<app-text
+  text="{{ text1 }}"
+  size="medium"
+></app-text>
+
+<app-text
+  text="{{ text2 }}"
+  size="medium"
+></app-text>
+
+<app-text
+  text="Pour rappel, l’objectif de cette partie est de faire une recette à partir d’un aliment qu’on nous aura imposé."
+  size="medium"
+></app-text>
+
+<app-button
+  label="Suivant"
+  color="primary"
+  size="medium"
+  (clicked)="gotoAliment()"
+></app-button>

@@ -18,9 +18,15 @@ import { Router } from '@angular/router';
 export class RoleComponent {
   @Input() question: string = 'Veux tu cuisiner lors de cette partie ?';
 
-  constructor(private partieBuilder: PartieBuilderService, private router: Router,private route: ActivatedRoute, private api: ApiService) {}
+  constructor(
+    private partieBuilder: PartieBuilderService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private api: ApiService
+  ) {}
 
   ngOnInit() {
+    this.partieBuilder.checkInitiatorOrRedirect();
     const partie = this.partieBuilder.getAll();
 
     const userIdSelected: string = <string>this.route.snapshot.paramMap.get('id');

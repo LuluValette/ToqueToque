@@ -4,7 +4,10 @@ import { ButtonComponent } from '../../../components/button/button.component';
 
 @Component({
   selector: 'app-card-with-button',
-  imports: [ButtonComponent],
+  imports: [
+    CommonModule,
+    ButtonComponent
+  ],
   templateUrl: './card-with-button.component.html',
   styleUrl: './card-with-button.component.css'
 })

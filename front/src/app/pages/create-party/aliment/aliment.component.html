@@ -1,0 +1,32 @@
+<div>
+  <app-text text="Il est temps de choisir les ingrédients !" size="large"></app-text>
+
+  <ul>
+    <li *ngFor="let ingredient of ingredients">
+      <app-card-with-button
+        [title]="ingredient.name"
+        [image]="ingredient.image || ''"
+        [buttonLabel]="'Retirer'"
+        [buttonColor]="'danger'"
+        [buttonSize]="'small'"
+        (buttonClicked)="removeIngredient(ingredient.id)"
+      ></app-card-with-button>
+    </li>
+  </ul>
+
+  <app-card-with-button
+    title="Ajouter un ingrédient"
+    image=""
+    [buttonLabel]="'Ajouter'"
+    [buttonColor]="'primary'"
+    [buttonSize]="'small'"
+    (buttonClicked)="gotoRechercheIngredient()"
+  ></app-card-with-button>
+
+  <app-button
+    label="Finaliser la partie"
+    color="primary"
+    size="medium"
+    (clicked)="gotoRecapitulatif()"
+  ></app-button>
+</div>

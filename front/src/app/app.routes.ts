@@ -7,6 +7,13 @@ import { InfoComponent } from './pages/create-party/info/info.component';
 import { RoleComponent } from './pages/create-party/role/role.component';
 import {LoginComponent} from './pages/login/login.component';
 import {ParticipantComponent} from './pages/create-party/participant/participant.component';
+import {
+  RechercheParticipantComponent
+} from './pages/create-party/recherche-participant/recherche-participant.component';
+import {TransitionComponent} from './pages/create-party/transition/transition.component';
+import {AlimentComponent} from './pages/create-party/aliment/aliment.component';
+import {RechercheAlimentComponent} from './pages/create-party/recherche-aliment/recherche-aliment.component';
+import {RecapitulatifComponent} from './pages/create-party/recapitulatif/recapitulatif.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -20,4 +27,10 @@ export const routes: Routes = [
     { path: 'create-party', component: InfoComponent },
     { path: 'create-party/role/:id', component: RoleComponent },
     { path: 'create-party/participant', component: ParticipantComponent },
+    { path: 'create-party/recherche-participant', component: RechercheParticipantComponent },
+    { path: 'create-party/transition', component: TransitionComponent },
+    { path: 'create-party/aliment', component: AlimentComponent },
+    { path: 'create-party/recherche-aliment', component: RechercheAlimentComponent },
+    { path: 'create-party/recapitulatif', component: RecapitulatifComponent },
+
 ];

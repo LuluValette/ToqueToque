@@ -1,0 +1,57 @@
+<div class="p-4 flex flex-col gap-4 items-center">
+
+  <app-text text="Compte rendu de la partie" size="large"></app-text>
+
+  <div class="bg-yellow-100 text-center p-4 rounded-lg border border-dashed border-yellow-500 text-sm max-w-md">
+    Voici le compte rendu de la partie que tu crées.<br />
+    Pour rappel, la partie sera le <strong>{{ date }}</strong> à <strong>{{ heure }}</strong> !
+  </div>
+
+  <app-text text="Participants" size="medium"></app-text>
+
+  <div class="w-full max-w-md flex flex-col gap-3">
+    <ng-container *ngFor="let participant of participants">
+      <app-card-with-button
+        [title]="getUserName(participant.userId)"
+        image=""
+        [buttonLabel]="'Supprimer'"
+        [buttonColor]="'danger'"
+        [buttonSize]="'small'"
+        (buttonClicked)="supprimerParticipant(participant.userId)"
+      ></app-card-with-button>
+
+      <div *ngIf="getIngredientAttribue(participant.userId) as ingredient" class="text-sm text-center italic">
+        {{ getUserName(participant.userId) }} a reçu l'aliment
+        <strong class="text-orange-600">{{ ingredient.name }}</strong> !
+      </div>
+    </ng-container>
+  </div>
+
+  <app-text text="Aliments choisis" size="medium"></app-text>
+
+  <div class="w-full max-w-md flex flex-col gap-3">
+    <ng-container *ngFor="let ingredient of ingredients">
+      <app-card-with-button
+        [title]="ingredient.name"
+        [image]="ingredient.image || ''"
+        [buttonLabel]="'Supprimer'"
+        [buttonColor]="'danger'"
+        [buttonSize]="'small'"
+        (buttonClicked)="supprimerIngredient(ingredient._id)"
+      ></app-card-with-button>
+
+      <div *ngIf="ingredient.assignedTo" class="text-sm text-center italic">
+        L'aliment <strong class="text-orange-600">{{ ingredient.name }}</strong> a été attribué à
+        <strong class="text-blue-600">{{ getUserName(ingredient.assignedTo) }}</strong> !
+      </div>
+    </ng-container>
+  </div>
+
+  <app-button
+    label="Lancer la partie"
+    color="primary"
+    size="medium"
+    (clicked)="lancerPartie()"
+  ></app-button>
+
+</div>

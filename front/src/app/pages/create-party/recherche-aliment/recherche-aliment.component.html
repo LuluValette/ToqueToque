@@ -1,0 +1,27 @@
+<div class="p-4 flex flex-col gap-6 items-center">
+
+  <app-text text="Rechercher un aliment" size="large"></app-text>
+
+  <div class="w-full max-w-md p-4 rounded-xl">
+    <app-input
+      label="Chercher un aliment"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="filterIngredients()"
+    ></app-input>
+  </div>
+
+  <app-text text="Suggestions" size="large"></app-text>
+
+  <div class="w-full max-w-md flex flex-col gap-4">
+    <app-card-with-button
+      *ngFor="let ingredient of filteredIngredients"
+      [title]="ingredient.name"
+      [image]="ingredient.image || ''"
+      [buttonLabel]="'Ajouter'"
+      [buttonColor]="'primary'"
+      [buttonSize]="'small'"
+      (buttonClicked)="addIngredient(ingredient)"
+    ></app-card-with-button>
+  </div>
+
+</div>
