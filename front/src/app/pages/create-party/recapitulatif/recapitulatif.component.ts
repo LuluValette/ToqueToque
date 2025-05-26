@@ -4,6 +4,8 @@ import { PartieBuilderService } from '../../../services/partie-builder.service';
 import { TextComponent } from '../../../components/text/text.component';
 import { ButtonComponent } from '../../../components/button/button.component';
 import { CardWithButtonComponent } from '../../../components/card/card-with-button/card-with-button.component';
+import {ApiService} from '../../../services/api.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-recapitulatif',
@@ -22,7 +24,11 @@ export class RecapitulatifComponent {
   participants: any[] = [];
   ingredients: any[] = [];
 
-  constructor(private partieBuilder: PartieBuilderService) {}
+  constructor(
+    private router: Router,
+    private api: ApiService,
+    private partieBuilder: PartieBuilderService
+  ) {}
 
   ngOnInit(): void {
     this.partieBuilder.checkInitiatorOrRedirect();
@@ -55,7 +61,36 @@ export class RecapitulatifComponent {
   }
 
   lancerPartie(): void {
-    console.log('Partie lancée !');
-    // Ajoute ici la logique de validation/navigation
+    const partiePayload = {
+      date: '20200101',
+      heure: '1200',
+      info: '',
+      initiator: '681a007acc93656646159643'
+    };
+
+    this.api.createPartie(partiePayload).subscribe({
+      next: (partie: any) => {
+        const partieId = partie._id;
+
+        const joinRequests = this.participants.map(p =>
+          this.api.joinPartie(partieId, {
+            userId: p.user._id,
+            ingredientImpose: p.ingredientImpose
+          })
+        );
+
+        Promise.all(joinRequests.map(obs => obs.toPromise()))
+          .then(() => {
+            console.log('Partie créée et joueurs assignés');
+            this.router.navigate(['/']);
+          })
+          .catch(error => {
+            console.error('Erreur lors de l’ajout des joueurs :', error);
+          });
+      },
+      error: err => {
+        console.error('Erreur création partie :', err);
+      }
+    });
   }
 }

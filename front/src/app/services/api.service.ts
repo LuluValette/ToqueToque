@@ -35,5 +35,13 @@ export class ApiService {
     return this.http.get<Ingredient[]>(`${this.apiUrl}/foods`);
   }
 
+  createPartie(payload: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/parties`, payload);
+  }
+
+  joinPartie(partieId: string, payload: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/parties/${partieId}/join`, payload);
+  }
+
 
 }
