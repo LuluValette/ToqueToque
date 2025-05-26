@@ -4,6 +4,7 @@ import { environment } from '../../environment';
 import { User } from '../models/user.model';
 import { Observable } from 'rxjs';
 import {Ingredient} from '../models/ingredient.model';
+import {Recipe} from '../models/recipe.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,8 @@ export class ApiService {
     return this.http.get<User>(`${this.apiUrl}/users/${id}`);
   }
 
-  getRecipes() {
-    return this.http.get(`${this.apiUrl}/recipes`);
+  getRecipes(): Observable<Recipe> {
+    return this.http.get<Recipe>(`${this.apiUrl}/recipes`);
   }
 
   getFriendsByUserId(userId: string): Observable<User[]> {

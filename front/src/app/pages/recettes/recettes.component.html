@@ -1,3 +1,9 @@
 <app-text text="Liste des recettes" size="large"></app-text>
 
-<app-recette></app-recette>
+<app-input
+  label="Rechercher une recette"
+  [(ngModel)]="searchTerm"
+  (ngModelChange)="searchRecipes()"
+></app-input>
+
+<app-recette [recettes]="filteredRecipes"></app-recette>

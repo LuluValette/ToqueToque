@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { RecetteService } from '../../services/recette.service';
 import { CommonModule } from '@angular/common';
 import { CardSimpleComponent } from '../card/card-simple/card-simple.component';
 import { get } from 'node:http';
+import {Recipe} from '../../models/recipe.model';
 
 @Component({
   selector: 'app-recette',
@@ -11,21 +12,23 @@ import { get } from 'node:http';
   templateUrl: './recette.component.html',
 })
 export class RecetteComponent implements OnInit {
-  recettes: any[] = [];
+  @Input() recettes: Recipe[] | null = null;
 
-  constructor(private recetteService: RecetteService) {}
+  constructor(
+    private recetteService: RecetteService
+  ) {}
 
-  ngOnInit() {
-    console.log('RecetteComponent INIT');
-    this.getRecettes();
-  }
-  ngOnChanges() {
-    console.log('RecetteComponent CHANGES');
-  }
+  ngOnInit(): void {
+    // Si aucune liste n’est passée en @Input(), on la charge depuis l’API
+    if (!this.recettes) {
+      console.log('Aucune liste de recettes passée en @Input(), chargement depuis l’API');
+      this.recetteService.getRecipes().subscribe((data: any) => {
+        this.recettes = data;
+      });
+    }
+    else {
+      console.log('Liste de recettes passée en @Input() :', this.recettes);
+    }
 
-  getRecettes() {
-    this.recetteService.getRecipes().subscribe((data: any) => {
-      this.recettes = data;
-    });
   }
 }

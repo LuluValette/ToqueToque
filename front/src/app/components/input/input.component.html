@@ -10,8 +10,9 @@
 
   <!-- Input -->
   <input
-    [(ngModel)]="value"
-    (ngModelChange)="valueChange.emit($event)"
+    [value]="value"
+    (input)="onInput($event)"
+    (blur)="onTouched()"
     class="rounded-[12px] px-4 py-2 w-full max-w-sm border border-black outline-none"
     style="background-color: var(--background-color); color: var(--text-color);"
   />
