@@ -33,8 +33,8 @@ export class AlimentComponent {
   }
 
   removeIngredient(ingredientId: string): void {
-    this.ingredients = this.ingredients.filter(i => i.id !== ingredientId);
-    this.partieBuilder.set('ingredients', this.ingredients);
+    this.partieBuilder.removeIngredient(ingredientId);
+    this.ngOnInit();
   }
 
   gotoRechercheIngredient(): void {
@@ -42,6 +42,17 @@ export class AlimentComponent {
   }
 
   gotoRecapitulatif(): void {
+    // Vérification que la liste des ingrédients n'est pas vide
+    if (this.ingredients.length === 0) {
+      alert('Veuillez ajouter au moins un ingrédient avant de continuer.');
+      return;
+    }
+    // Vérifie que la liste des ingrédients et cuisinier sont egaux
+    const participantCount = this.partieBuilder.countParticipantsSansInitiator();
+    if (this.ingredients.length !== participantCount) {
+      alert("Le nombre d'ingrédient doit être égal au nombre de cuisinier.");
+      return;
+    }
     this.router.navigate(['/create-party/recapitulatif']);
   }
 }

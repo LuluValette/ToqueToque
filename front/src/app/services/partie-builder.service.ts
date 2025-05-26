@@ -69,5 +69,22 @@ export class PartieBuilderService {
     return participants.filter((p: { userId: string }) => p.userId !== initiatorId).length;
   }
 
+  addIngredient(ingredient: any): void {
+    const ingredients = this.partieData.ingredients || [];
+
+    const exists = ingredients.some((i: any) => i._id === ingredient._id);
+    if (!exists) {
+      ingredients.push(ingredient);
+      this.partieData.ingredients = ingredients;
+    }
+    else {
+      alert("L'ingrédient existe déjà dans la liste.");
+    }
+  }
+
+  removeIngredient(ingredientId: string): void {
+    const ingredients = this.partieData.ingredients || [];
+    this.partieData.ingredients = ingredients.filter((i: any) => i._id !== ingredientId);
+  }
 
 }

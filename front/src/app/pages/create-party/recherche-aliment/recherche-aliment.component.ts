@@ -48,17 +48,7 @@ export class RechercheAlimentComponent {
   }
 
   addIngredient(ingredient: any): void {
-    const ingredients = this.partieBuilder.get('ingredients') || [];
-    const alreadyExists = ingredients.some((i: { _id: any; }) => i._id === ingredient._id);
-
-    if (!alreadyExists) {
-      ingredients.push(ingredient);
-      this.partieBuilder.set('ingredients', ingredients);
-      this.router.navigate(['/create-party/aliment']);
-    }
-    else{
-      alert("L'ingrédient existe déjà dans la liste.");
-    }
-
+    this.partieBuilder.addIngredient(ingredient)
+    this.router.navigate(['/create-party/aliment']);
   }
 }
