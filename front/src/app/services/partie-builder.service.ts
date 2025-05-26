@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import {User} from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,8 +48,8 @@ export class PartieBuilderService {
     }
   }
 
-  addParticipant(userId: string, role: string) {
-    this.partieData.participants.push({ userId, role });
+  addParticipant(user: User | null, role: string) {
+    this.partieData.participants.push({ user, role });
   }
 
   removeParticipant(userId: string) {

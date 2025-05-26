@@ -24,7 +24,6 @@ export class HomeComponent {
   ngOnInit() {
     this.user = this.auth.getUser();
     if (this.user) {
-      alert("Vous êtes déjà connecté");
     }
   }
 

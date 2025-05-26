@@ -7,6 +7,7 @@ import { ApiService } from '../../../services/api.service';
 import { TextComponent } from '../../../components/text/text.component';
 import { ButtonComponent } from '../../../components/button/button.component';
 import {Router} from '@angular/router';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-participant',
@@ -26,6 +27,7 @@ export class ParticipantComponent implements OnInit {
   userNames: { [userId: string]: string } = {}; // clé en string pour correspondre à userId
 
   constructor(
+    private auth: AuthService,
     private router: Router,
     private partieBuilder: PartieBuilderService,
     private api: ApiService
@@ -44,10 +46,6 @@ export class ParticipantComponent implements OnInit {
     console.log(this.participants);
   }
 
-  getUserName(userId: string): string {
-    return this.userNames[userId] || 'Chargement...';
-  }
-
   gotoParticipant() {
     this.router.navigate(['/create-party/recherche-participant']);
   }
@@ -63,6 +61,11 @@ export class ParticipantComponent implements OnInit {
   }
 
   removeParticipant(userId: string) {
+    console.log(this.auth.getUser()._id + " === " + userId)
+    if (this.auth.getUser()._id === userId) {
+      alert("Vous ne pouvez pas vous retirer de la partie en cours.");
+      return;
+    }
     this.partieBuilder.removeParticipant(userId);
     this.participants = this.partieBuilder.get('participants');
     // On met à jour la liste des participants

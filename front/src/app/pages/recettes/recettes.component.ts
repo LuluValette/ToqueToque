@@ -13,10 +13,4 @@ import { TextComponent } from '../../components/text/text.component';
   styleUrl: './recettes.component.css'
 })
 export class RecettesComponent {
-  ngOnInit() {
-    console.log('RecettesComponent INIT');
-  }
-  ngOnChanges() {
-    console.log('RecettesComponent CHANGES');
-  }
 }

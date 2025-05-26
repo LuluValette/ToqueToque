@@ -4,22 +4,22 @@
     <li *ngFor="let participant of participants">
       <app-card-with-button
         *ngIf="participant.role === 'invité'"
-        [title]="getUserName(participant.userId)"
+        [title]="participant.user.name"
         image=""
         [buttonLabel]="'Retirer'"
         [buttonColor]="'danger'"
         [buttonSize]="'small'"
-        (buttonClicked)="removeParticipant(participant.userId)"
+        (buttonClicked)="removeParticipant(participant.user._id)"
       ></app-card-with-button>
 
       <app-card-with-tiny-icon
         *ngIf="participant.role === 'cuisinier'"
-        [title]="getUserName(participant.userId)"
+        [title]="participant.user.name"
         image=""
         [buttonLabel]="'Retirer'"
         [buttonColor]="'danger'"
         [buttonSize]="'small'"
-        (buttonClicked)="removeParticipant(participant.userId)"
+        (buttonClicked)="removeParticipant(participant.user._id)"
       ></app-card-with-tiny-icon>
     </li>
   </ul>

@@ -52,7 +52,15 @@ export class RechercheParticipantComponent {
   }
 
   addFriend(friend: any): void {
-    // On redirige vers la page suivante
-    this.router.navigate(['/create-party/role', friend._id]);
+    const participants = this.partieBuilder.get('participants') || [];
+
+    const alreadyInPartie = participants.some((p: any) => p.user._id === friend._id);
+
+    if (!alreadyInPartie) {
+      // On redirige vers la page suivante
+      this.router.navigate(['/create-party/role', friend._id]);
+    } else {
+      alert(friend.name + ' est déjà dans la partie.');
+    }
   }
 }
