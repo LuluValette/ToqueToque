@@ -1,0 +1,61 @@
+<div class="p-4 flex flex-col items-center gap-6 min-h-screen">
+
+  <!-- Titre -->
+  <app-text text="S’inscrire" size="large"></app-text>
+
+  <!-- Formulaire -->
+  <form class="flex flex-col gap-4 w-full max-w-md" (ngSubmit)="submit()" #form="ngForm">
+
+
+      <app-input
+        label="Nom d’utilisateur"
+        [(ngModel)]="formData.username"
+        name="username"
+        [required]="true"
+      ></app-input>
+
+      <app-input
+        label="Numéro de téléphone"
+        [(ngModel)]="formData.phone"
+        name="phone"
+        [required]="true"
+      ></app-input>
+
+      <app-input
+        label="Mot de passe"
+        [(ngModel)]="formData.password"
+        name="password"
+        type="password"
+        [required]="true"
+      ></app-input>
+
+      <app-input
+        label="Confirmer le mot de passe"
+        [(ngModel)]="formData.confirmPassword"
+        name="confirmPassword"
+        type="password"
+        [required]="true"
+      ></app-input>
+
+    <app-button
+      label="S’inscrire"
+      color="primary"
+      size="large"
+    ></app-button>
+
+  </form>
+
+  <!-- Liens -->
+  <div class="flex gap-4 mt-8">
+    <app-button
+      label="Politique de confidentialitée"
+      color="secondary"
+      size="medium"
+    ></app-button>
+    <app-button
+      label="CGU"
+      color="secondary"
+      size="medium"
+    ></app-button>
+  </div>
+</div>

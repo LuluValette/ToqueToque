@@ -32,4 +32,8 @@ export class LoginComponent {
       }
     });
   }
+
+  handleRegister() {
+    this.router.navigate(['/register']);
+  }
 }

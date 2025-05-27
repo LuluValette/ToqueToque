@@ -15,12 +15,15 @@ import {AlimentComponent} from './pages/create-party/aliment/aliment.component';
 import {RechercheAlimentComponent} from './pages/create-party/recherche-aliment/recherche-aliment.component';
 import {RecapitulatifComponent} from './pages/create-party/recapitulatif/recapitulatif.component';
 import {ProfileComponent} from './pages/profile/profile.component';
+import {RegistrationComponent} from './pages/registration/registration.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
 
     { path: 'login', component: LoginComponent },
     { path: 'profile', component: ProfileComponent },
+    { path: 'register', component: RegistrationComponent },
+
 
     { path: 'recettes', component: RecettesComponent },
     { path: 'recettes/:id', component: RecettesIngredientsComponent },

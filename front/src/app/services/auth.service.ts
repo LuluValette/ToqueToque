@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environment';
 import {User} from '../models/user.model';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,10 @@ export class AuthService {
 
   login(phone: string, password: string) {
     return this.http.post(`${this.apiUrl}/auth/login`, { phone, password });
+  }
+
+  registration(data: { name: string; phone: string; password: string }): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/users`, data);
   }
 
   saveUser(user: any) {

@@ -1,7 +1,21 @@
-<app-input label="Téléphone" [(value)]="phone"></app-input>
-<app-input label="Mot de passe" [(value)]="password"></app-input>
+<app-input
+  label="Téléphone"
+  [(value)]="phone"
+  [required]="true"
+></app-input>
+<app-input
+  label="Mot de passe"
+  [(value)]="password"
+  [required]="true"
+></app-input>
 
 <app-button
   label="Connexion"
   (clicked)="handleLogin()"
+></app-button>
+
+<app-button
+  label="S'inscrire"
+  color="secondary"
+  (clicked)="handleRegister()"
 ></app-button>
