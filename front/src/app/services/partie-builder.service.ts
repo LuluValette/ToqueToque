@@ -52,9 +52,10 @@ export class PartieBuilderService {
     this.partieData.participants.push({ user, role });
   }
 
-  removeParticipant(userId: string) {
-    this.partieData.participants = this.partieData.participants.filter(
-        (participant: { userId: string; }) => participant.userId !== userId
+  removeParticipant(userId: string): void {
+    const participants = this.partieData['participants'] || [];
+    this.partieData['participants'] = participants.filter(
+      (participant: any) => participant.user._id !== userId
     );
   }
 

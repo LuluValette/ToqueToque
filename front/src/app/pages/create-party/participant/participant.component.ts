@@ -38,12 +38,12 @@ export class ParticipantComponent implements OnInit {
     this.participants = this.partieBuilder.get('participants');
 
     this.participants.forEach(participant => {
-      this.api.getUserById(participant.userId).subscribe(user => {
-        this.userNames[participant.userId] = user.name;
-      });
+      if (participant.userId != null){
+        this.api.getUserById(participant.userId).subscribe(user => {
+          this.userNames[participant.userId] = user.name;
+        });
+      }
     });
-
-    console.log(this.participants);
   }
 
   gotoParticipant() {
@@ -61,13 +61,14 @@ export class ParticipantComponent implements OnInit {
   }
 
   removeParticipant(userId: string) {
-    console.log(this.auth.getUser()._id + " === " + userId)
     if (this.auth.getUser()._id === userId) {
       alert("Vous ne pouvez pas vous retirer de la partie en cours.");
       return;
     }
+
     this.partieBuilder.removeParticipant(userId);
     this.participants = this.partieBuilder.get('participants');
+    console.log(this.participants)
     // On met à jour la liste des participants
     this.ngOnInit();
   }
