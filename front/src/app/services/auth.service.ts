@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environment';
+import {User} from '../models/user.model';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private apiUrl = environment.apiUrl;
+  private userSubject = new BehaviorSubject<User | null>(null);
 
   constructor(private http: HttpClient) {}
 
@@ -15,6 +18,11 @@ export class AuthService {
   }
 
   saveUser(user: any) {
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  setUser(user: User): void {
+    this.userSubject.next(user);
     localStorage.setItem('user', JSON.stringify(user));
   }
 
@@ -31,10 +39,19 @@ export class AuthService {
   }
 
   logout() {
+    this.userSubject.next(null);
     localStorage.removeItem('user');
   }
 
   isAuthenticated() {
     return !!this.getUser();
+  }
+
+  updateUserInfo(data: Partial<User>): void {
+    const currentUser = this.getUser();
+    if (currentUser) {
+      const updatedUser = { ...currentUser, ...data };
+      this.setUser(updatedUser);
+    }
   }
 }

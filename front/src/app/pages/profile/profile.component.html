@@ -1,0 +1,40 @@
+<div class="p-6 flex flex-col gap-6 max-w-md mx-auto">
+
+  <app-text text="Mon profile" size="large"></app-text>
+
+  <!-- Nom d'utilisateur -->
+  <app-input
+    label="Nom d'utilisateur"
+    [(ngModel)]="form.username"
+  ></app-input>
+
+  <!-- Téléphone -->
+  <app-input
+    label="Numéro de téléphone"
+    [(ngModel)]="form.phone"
+  ></app-input>
+
+  <!-- Mot de passe -->
+  <app-input
+    label="Mot de passe"
+    type="password"
+    [(ngModel)]="form.password"
+  ></app-input>
+
+  <!-- Bouton enregistrer -->
+  <app-button
+    label="Enregistrer"
+    color="primary"
+    size="medium"
+    (clicked)="submit()"
+  ></app-button>
+
+  <app-button
+    label="Deconnexion"
+    color="secondary"
+    size="medium"
+    (clicked)="logout()"
+  ></app-button>
+
+
+</div>

@@ -1,9 +1,11 @@
 <header class="flex justify-between items-center px-4 py-2 h-16 shadow-md"
         style="background-color: var(--primary-color); color: var(--background);">
-  
+
   <h1 class="text-lg font-bold">ToqueToque</h1>
 
   <div class="w-10 h-10 rounded-full border-2 border-white overflow-hidden">
-    <img src="assets/user-icon.png" alt="Utilisateur" class="w-full h-full object-cover">
+    <a [routerLink]="isLoggedIn ? '/profile' : '/login'">
+      <img src="assets/user-icon.png" alt="Utilisateur" class="w-full h-full object-cover">
+    </a>
   </div>
 </header>
