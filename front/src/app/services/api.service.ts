@@ -47,6 +47,13 @@ export class ApiService {
     return this.http.put(`${this.apiUrl}/users/${userId}`, data);
   }
 
+  deleteFriend(userId: string, friendId: string): Observable<any> {
+    return this.http.request('delete', `${this.apiUrl}/friends/${userId}`, {
+      body: { friendId }
+    });
+  }
+
+
 
 
 }

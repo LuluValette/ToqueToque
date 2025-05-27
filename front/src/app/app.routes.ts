@@ -16,6 +16,7 @@ import {RechercheAlimentComponent} from './pages/create-party/recherche-aliment/
 import {RecapitulatifComponent} from './pages/create-party/recapitulatif/recapitulatif.component';
 import {ProfileComponent} from './pages/profile/profile.component';
 import {RegistrationComponent} from './pages/registration/registration.component';
+import {FriendListComponent} from './pages/friend-list/friend-list.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -23,7 +24,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'register', component: RegistrationComponent },
-
+    { path: 'friends', component: FriendListComponent },
 
     { path: 'recettes', component: RecettesComponent },
     { path: 'recettes/:id', component: RecettesIngredientsComponent },

@@ -5,7 +5,6 @@ import { InputComponent } from '../../components/input/input.component';
 import { TextComponent } from '../../components/text/text.component';
 import { ButtonComponent } from '../../components/button/button.component';
 
-
 @Component({
   selector: 'app-login',
   imports: [

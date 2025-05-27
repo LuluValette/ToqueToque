@@ -1,0 +1,13 @@
+<div class="p-4 flex flex-col gap-4 max-w-xl mx-auto">
+  <h2 class="text-2xl font-bold text-center">Mes amis</h2>
+
+  <app-card-with-button
+    *ngFor="let friend of friends"
+    [title]="friend.name"
+    [image]="friend.avatar || 'assets/default-avatar.png'"
+    [buttonLabel]="'Supprimer'"
+    [buttonColor]="'danger'"
+    [buttonSize]="'small'"
+    (buttonClicked)="removeFriend(friend._id)"
+  ></app-card-with-button>
+</div>
