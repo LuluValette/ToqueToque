@@ -1,0 +1,20 @@
+<div class="p-6 max-w-3xl mx-auto space-y-6">
+  <app-input
+    label="Rechercher une recette"
+    [(ngModel)]="searchTerm"
+    (ngModelChange)="onSearchChange()"
+  ></app-input>
+
+  <div *ngIf="filteredUsers.length; else noUser">
+    <div *ngFor="let user of filteredUsers" class="mb-4">
+      <app-card-with-button
+      [title]="user.name + ' - ' + user.phone"
+      (buttonClicked)="sendFriendRequest(user._id)">
+      </app-card-with-button>
+    </div>
+  </div>
+
+  <ng-template #noUser>
+    <p class="text-center text-gray-500">Aucun utilisateur trouvé.</p>
+  </ng-template>
+</div>

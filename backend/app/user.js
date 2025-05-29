@@ -2,6 +2,7 @@ const UserModel = require('../models/userModel');
 const FriendModel = require('../models/friendModel');
 const AllergieModel = require('../models/allergieModel');
 const UserAllergieModel = require('../models/user_allergie');
+const UserPartieModel = require('../models/partie_userModel');
 
 class User {
   async create(req, res) {
@@ -197,7 +198,30 @@ class User {
   
     res.json({ message: 'Allergie supprimée pour cet utilisateur' });
   }
-  
+
+  // --------------------------------------------------------------
+  // Routes API pour les parties
+  // --------------------------------------------------------------
+
+  async getParties(req, res) {
+    const { id } = req.params;
+
+    // Vérifie que l'utilisateur existe
+    const user = await UserModel.findById(id);
+    if (!user) return res.status(404).json({ error: 'Utilisateur non trouvé' });
+
+    try {
+      // Récupère toutes les participations de l'utilisateur
+      const participations = await UserPartieModel.find({ user: id }).populate('partie');
+
+      // Extrait les infos des parties
+      const parties = participations.map(p => p.partie);
+
+      res.json(parties);
+    } catch (err) {
+      res.status(500).json({ error: 'Erreur lors de la récupération des parties', details: err.message });
+    }
+  }
     
 }
 

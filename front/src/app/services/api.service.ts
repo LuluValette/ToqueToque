@@ -15,8 +15,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  getUsers() {
-    return this.http.get(`${this.apiUrl}/users`);
+  getUsers(): Observable<User[]>  {
+    return this.http.get<User[]>(`${this.apiUrl}/users`);
   }
 
   getUserById(id: string) : Observable<User> {
@@ -47,13 +47,21 @@ export class ApiService {
     return this.http.put(`${this.apiUrl}/users/${userId}`, data);
   }
 
+  addFriend(currentUserId: string, targetUserId: string) {
+    return this.http.post(`${this.apiUrl}/friends/${currentUserId}`, {
+      userId: targetUserId
+    });
+  }
+
   deleteFriend(userId: string, friendId: string): Observable<any> {
     return this.http.request('delete', `${this.apiUrl}/friends/${userId}`, {
       body: { friendId }
     });
   }
 
-
-
+  // api.service.ts
+  getUserParties(userId: string) {
+    return this.http.get<any[]>(`${this.apiUrl}/users/${userId}/parties`);
+  }
 
 }

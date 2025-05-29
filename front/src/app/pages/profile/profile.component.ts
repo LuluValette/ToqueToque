@@ -51,6 +51,10 @@ export class ProfileComponent {
     this.router.navigate(['/friends']);
   }
 
+  searchFriends(): void {
+    this.router.navigate(['/search-friends']);
+  }
+
   submit(): void {
     const payload = {
       name: this.form.username,

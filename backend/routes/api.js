@@ -26,6 +26,10 @@ routerApi.post('/users/:id/allergies/:allergyId', (req, res) => User.addAllergie
 routerApi.get('/users/:id/allergies', (req, res) => User.getAllergie(req, res));
 routerApi.delete('/users/:id/allergies/:allergyId', (req, res) => User.deleteAllergie(req, res));
 
+// Route API pour les utilisateurs d'une partie
+routerApi.get('/users/:id/parties', User.getParties);
+
+
 // -----------------------------------------------------------
 // Routes API pour les parties
 routerApi.post('/parties', (req, res) => Partie.create(req, res));

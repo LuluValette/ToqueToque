@@ -4,6 +4,7 @@ import { ButtonComponent } from '../.././components/button/button.component';
 import { RecetteComponent } from '../.././components/recette/recette.component';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -18,13 +19,27 @@ import { Router } from '@angular/router';
 export class HomeComponent {
   isConnected = false;
   user: any = null;
+  parties: any[] = [];
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private api: ApiService,
+  ) {}
 
   ngOnInit() {
     this.user = this.auth.getUser();
     if (this.user) {
     }
+
+    this.api.getUserParties(this.auth.getUser()._id).subscribe({
+      next: (data) => {
+        this.parties = data;
+      },
+      error: (err) => {
+        console.error('Erreur chargement parties', err);
+      }
+    });
   }
 
   createParty() {
