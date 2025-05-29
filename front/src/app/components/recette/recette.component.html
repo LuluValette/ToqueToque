@@ -2,6 +2,7 @@
   <app-card-simple
     *ngFor="let r of recettes"
     [title]="r.title"
-    [link]="['/recettes', r._id]">
+    [link]="['/recettes', r._id]"
+    image="/picture/recettes/{{ r.image }}">
   </app-card-simple>
 </div>

@@ -15,13 +15,12 @@ Voici un resumé des fonctionnalités implémentées :
 - [x] Suppression d'un ami
 - [x] Modification de son profil
 - [ ] Ajout d'un ami
-- [ ] Création d'une recette
-- [ ] Création d'un classement
 - [ ] Rejoindre une partie de jeu
 - [ ] Noter une recette
-- [ ] Renseigné ces allergies
 - [ ] mettre en place les photos des utilisateurs
-
+- [ ] Création d'une recette
+- [ ] Création d'un classement
+- [ ] Renseigné ces allergies
 
 Commande pour lancer l'application
 ```bash
