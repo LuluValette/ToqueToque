@@ -36,6 +36,15 @@ export class SearchFriendsComponent {
   }
 
   onSearchChange() {
+    if (this.searchTerm.trim() === '') {
+      this.filteredUsers = this.users;
+    } else {
+      const lowerSearchTerm = this.searchTerm.toLowerCase();
+      this.filteredUsers = this.users.filter(user =>
+        user.name.toLowerCase().includes(lowerSearchTerm) ||
+        user.email.toLowerCase().includes(lowerSearchTerm)
+      );
+    }
   }
 
   sendFriendRequest(targetUserId: string) {

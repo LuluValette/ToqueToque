@@ -32,3 +32,14 @@ cd ./frontend
 ng serve
 
 ```
+
+## Build des images docker
+Pour construire les images docker, il faut se placer à la racine du projet et lancer les commandes suivantes :
+```bash
+
+docker build -f docker/api-rest/Dockerfile -t api-rest .
+
+docker build -f docker/mongo-db/Dockerfile -t api-rest .
+
+docker build -f docker/app/Dockerfile -t frontend .
+```
