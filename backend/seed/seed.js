@@ -10,12 +10,12 @@ mongoose.connection.once('open', async () => {
         await mongoose.connection.db.dropDatabase();
 
         // Le reste de ton code...
-        const User = require('../models/userModel');
-        const Aliment = require('../models/alimentModel');
-        const Allergie = require('../models/allergieModel');
-        const Partie = require('../models/partieModel');
-        const Recette = require('../models/recetteModel');
-        const Friend = require('../models/friendModel');
+        const User = require('../app/relations/userModel');
+        const Aliment = require('../app/relations/alimentModel');
+        const Allergie = require('../app/relations/allergieModel');
+        const Partie = require('../app/relations/partieModel');
+        const Recette = require('../app/relations/recetteModel');
+        const Friend = require('../app/relations/friendship.model');
 
         const anas = await User.create({
             name: 'Anas',

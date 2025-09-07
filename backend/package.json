@@ -2,6 +2,42 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "mongoose": "^8.14.3"
+    "jest": "^30.0.5",
+    "mongodb-memory-server": "^10.2.0",
+    "mongoose": "^8.14.3",
+    "supertest": "^7.1.4"
+  },
+  "scripts": {
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch",
+    "test:e2e": "jest --runInBand tests/e2e",
+    "coverage": "jest --coverage"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/jest.setup.js"
+    ],
+    "testTimeout": 30000,
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    },
+    "collectCoverageFrom": [
+      "app/**/*.js",
+      "services/**/*.js",
+      "repositories/**/*.js",
+      "routes/**/*.js",
+      "!**/*.test.js",
+      "!**/jest.setup.js",
+      "!**/helpers/**",
+      "!**/factories/**",
+      "!server.js"
+    ],
+    "coverageReporters": ["text", "lcov", "html"]
   }
 }

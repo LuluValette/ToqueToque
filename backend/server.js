@@ -1,16 +1,12 @@
 const express = require('express');
-const path = require('path');
-const apiRoutes = require('./routes/api');
+const apiRoutes = require('./api');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
 const app = express();
 const PORT = 3000;
 
-mongoose.connect('mongodb://admin:admin@localhost:27017/ToqueToque?authSource=admin', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })  
+mongoose.connect('mongodb://admin:admin@localhost:27017/ToqueToque?authSource=admin')
   .then(() => console.log('✅ Connecté à MongoDB'))
   .catch(err => console.error('❌ Erreur MongoDB :', err));
 
