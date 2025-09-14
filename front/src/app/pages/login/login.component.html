@@ -1,21 +1,27 @@
-<app-input
-  label="Téléphone"
-  [(value)]="phone"
-  [required]="true"
-></app-input>
-<app-input
-  label="Mot de passe"
-  [(value)]="password"
-  [required]="true"
-></app-input>
+<div class="flex justify-center mb-4">
+  <app-text text="Se connecter" size="large"></app-text>
+</div>
+<div class="flex flex-col gap-4 mb-4 bg-[var(--background-color)] shadow-[0_0_10px_6px_var(--background-color)]">
+  <app-input
+    label="Téléphone"
+    [(value)]="phone"
+    [required]="true"
+  ></app-input>
+  <app-input
+    label="Mot de passe"
+    [(value)]="password"
+    [required]="true"
+  ></app-input>
+</div>
+<div class="flex justify-center flex-row gap-4">
+  <app-button
+    label="Connexion"
+    (clicked)="handleLogin()"
+  ></app-button>
 
-<app-button
-  label="Connexion"
-  (clicked)="handleLogin()"
-></app-button>
-
-<app-button
-  label="S'inscrire"
-  color="secondary"
-  (clicked)="handleRegister()"
-></app-button>
+  <app-button
+    label="S'inscrire"
+    color="secondary"
+    (clicked)="handleRegister()"
+  ></app-button>
+</div>

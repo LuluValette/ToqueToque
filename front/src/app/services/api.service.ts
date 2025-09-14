@@ -28,7 +28,11 @@ export class ApiService {
   }
 
   getFriendsByUserId(userId: string): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/friends/${userId}`);
+    return this.http.get<User[]>(`${this.apiUrl}/users/friends/${userId}`);
+  }
+
+  getFriendsRequestByUserIDd(userId: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/users/friends_request/${userId}`);
   }
 
   getIngredients(): Observable<Ingredient[]> {
@@ -47,14 +51,20 @@ export class ApiService {
     return this.http.put(`${this.apiUrl}/users/${userId}`, data);
   }
 
-  addFriend(currentUserId: string, targetUserId: string) {
-    return this.http.post(`${this.apiUrl}/friends/${currentUserId}`, {
-      userId: targetUserId
+  addFriendRequest(currentUserId: string, targetUserId: string) {
+    return this.http.post(`${this.apiUrl}/users/friends_request/${currentUserId}`, {
+      targetId: targetUserId
+    });
+  }
+
+  acceptFriendRequest(currentUserId: string, targetUserId: string) {
+    return this.http.put(`${this.apiUrl}/users/friends_request/${currentUserId}`, {
+      targetId: targetUserId
     });
   }
 
   deleteFriend(userId: string, friendId: string): Observable<any> {
-    return this.http.request('delete', `${this.apiUrl}/friends/${userId}`, {
+    return this.http.delete(`${this.apiUrl}/users/friends/${userId}`, {
       body: { friendId }
     });
   }

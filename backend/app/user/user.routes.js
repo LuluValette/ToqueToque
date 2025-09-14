@@ -18,7 +18,6 @@ r.post('/friends_request/:id', (req, res) => ctrl.addFriendRequest(req, res));
 r.put('/friends_request/:id', (req, res) => ctrl.acceptFriendRequest(req, res));
 r.put('/friends_request/:id/reject', (req, res) => ctrl.rejectFriendRequest(req, res));
 r.get('/friends_request/:id', (req, res) => ctrl.getFriendRequest(req, res));
-r.get('/friends', (req, res) => ctrl.getFriendsList(req, res));
 r.get('/friends/:id', (req, res) => ctrl.getFriends(req, res));
 r.delete('/friends/:id', (req, res) => ctrl.removeFriend(req, res));
 

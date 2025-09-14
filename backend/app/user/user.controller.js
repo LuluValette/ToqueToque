@@ -81,12 +81,12 @@ class RecipeController {
 
     async addFriendRequest(req, res) {
         try {
-            const userId = req.params.id;
-            const requesterId = req.body.requesterId; // ID de l'utilisateur qui envoie la demande
+            const requesterId = req.params.id;
+            const targetId = req.body.targetId; // ID de l'utilisateur qui envoie la demande
             if (!requesterId) {
                 return res.status(400).json({ error: 'Requester ID is required' });
             }
-            const result = await service.addFriendRequest(userId, requesterId);
+            const result = await service.addFriendRequest(requesterId, targetId);
             res.status(201).json(result);
         } catch (err) {
             sendError(res, err);
@@ -95,12 +95,12 @@ class RecipeController {
 
     async acceptFriendRequest(req, res) {
         try {
-            const userId = req.params.id;
-            const requesterId = req.body.requesterId; // ID de l'utilisateur qui a envoyé la demande
+            const requesterId = req.params.id;
+            const targetId = req.body.targetId; // ID de l'utilisateur qui a envoyé la demande
             if (!requesterId) {
                 return res.status(400).json({ error: 'Requester ID is required' });
             }
-            const result = await service.acceptFriendRequest(userId, requesterId);
+            const result = await service.acceptFriendRequest(requesterId, targetId);
             res.json(result);
         } catch (err) {
             sendError(res, err);
@@ -126,16 +126,6 @@ class RecipeController {
             const userId = req.params.id;
             const requests = await service.getFriendRequest(userId);
             res.json(requests);
-        } catch (err) {
-            sendError(res, err);
-        }
-    }
-
-    async getFriendsList(req, res) {
-        try {
-            const userId = req.params.id;
-            const friends = await service.getFriendsList(userId);
-            res.json(friends);
         } catch (err) {
             sendError(res, err);
         }

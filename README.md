@@ -43,3 +43,10 @@ docker build -f docker/mongo-db/Dockerfile -t api-rest .
 
 docker build -f docker/app/Dockerfile -t frontend .
 ```
+
+dépendance à installer en dev :
+```bash
+npm install jest
+npm install mongodb-memory-server
+npm install supertest
+```

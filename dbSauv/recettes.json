@@ -1,0 +1,18 @@
+[
+  {
+    "_id": {"$oid": "683b71ab7448a8dd0620797c"},
+    "__v": 0,
+    "createdAt": {"$date": "2025-05-31T21:16:27.758Z"},
+    "description": "une recette simple de Tomate farcie",
+    "image": "image.png",
+    "title": "Tomate farcie"
+  },
+  {
+    "_id": {"$oid": "683b71c37448a8dd0620797e"},
+    "__v": 0,
+    "createdAt": {"$date": "2025-05-31T21:16:51.441Z"},
+    "description": "une recette simple de courgette farcie",
+    "image": "image.png",
+    "title": "courgette farcie"
+  }
+]

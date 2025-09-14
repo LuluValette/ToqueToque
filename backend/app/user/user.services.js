@@ -97,7 +97,7 @@ async function remove(id) {
 
 /* ------------------------------- Login -------------------------------- */
 
-async function login(phoneRaw, passwordRaw) {
+async function authenticate(phoneRaw, passwordRaw) {
     const phone = trimOrNull(phoneRaw);
     const password = passwordRaw ?? '';
     if (!phone || !password) throw httpError('Téléphone et mot de passe requis', 400);
@@ -127,8 +127,8 @@ async function addFriendRequest(requesterId, targetId) {
 
     try {
         const friendship = await FriendModel.create({
-            user1: a,
-            user2: b,
+            user1: a, // Requester
+            user2: b, // Target
             asckedBy: String(requesterId), // garde l’initiateur réel (même si trié)
             status: 'pending',
         });
@@ -168,12 +168,18 @@ async function rejectFriendRequest(userId, friendId) {
 }
 
 async function getFriendRequest(userId, friendId) {
+    const user = await UserModel.findById(userId).lean();
+    if (!user) throw httpError('Utilisateur non trouvé', 404);
 
-}
+    const relations = await FriendModel.find({
+        $or: [{ user1: userId }, { user2: userId }],
+        status: 'pending',
+    })
+        .populate([{ path: 'user1', select: 'name phone' }, { path: 'user2', select: 'name phone' }])
+        .lean();
 
-async function getFriendsList(userId) {
-    if (!isOid(userId)) throw httpError('ID invalide', 400);
-    if (String(userId) === String(friendId)) throw httpError('Impossible de se retirer soi-même', 400);
+    // renvoie la liste des "autres" utilisateurs
+    return relations.map((rel) => (String(rel.user1._id) === String(userId) ? rel.user2 : rel.user1));
 }
 
 async function getFriends(userId) {
@@ -254,13 +260,12 @@ module.exports = {
     update,
     remove,
     // Auth
-    login,
+    authenticate,
     // Friends
     addFriendRequest,
     acceptFriendRequest,
     rejectFriendRequest,
     getFriendRequest,
-    getFriendsList,
     getFriends,
     removeFriend,
     // Allergies

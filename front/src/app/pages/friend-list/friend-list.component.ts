@@ -15,6 +15,7 @@ import {CardWithButtonComponent} from '../../components/card/card-with-button/ca
 })
 export class FriendListComponent {
   friends: any[] = [];
+  friendsRequest: any[] = [];
   userId: string = '';
 
   constructor(private api: ApiService, private auth: AuthService) {}
@@ -26,6 +27,9 @@ export class FriendListComponent {
       this.api.getFriendsByUserId(this.userId).subscribe(friends => {
         this.friends = friends;
       });
+      this.api.getFriendsRequestByUserIDd(this.userId).subscribe(friendsRequest => {
+        this.friendsRequest = friendsRequest;
+      });
     }
   }
 
@@ -36,6 +40,17 @@ export class FriendListComponent {
       },
       error: err => {
         console.error('Erreur suppression ami :', err);
+      }
+    });
+  }
+
+  acceptFriend(friendId: string): void{
+    this.api.acceptFriendRequest(this.userId, friendId).subscribe({
+      next: () => {
+        this.friends = this.friends.filter(f => f._id !== friendId);
+      },
+      error: err => {
+        console.error('Erreur acceptation demande d\'ami :', err);
       }
     });
   }

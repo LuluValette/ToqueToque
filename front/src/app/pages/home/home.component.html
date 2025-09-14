@@ -13,26 +13,36 @@
 
 <div class="mt-8">
   <h2 class="text-2xl font-bold mb-4 text-center">Mes parties en cours</h2>
-  <div *ngIf="parties.length" class="space-y-4">
-    <ng-container *ngFor="let partie of parties">
-      <div *ngIf="!partie.finished" class="border p-4 rounded shadow">
-        <p><strong>Date :</strong> {{ partie.date | date:'fullDate' }}</p>
-        <p><strong>Heure :</strong> {{ partie.heure }}</p>
-        <p><strong>Info :</strong> {{ partie.info }}</p>
-      </div>
-    </ng-container>
-  </div>
+  @if (parties.length > 0) {
+    <div class="space-y-4">
+      <ng-container *ngFor="let partie of parties">
+        <div *ngIf="!partie.finished" class="border p-4 rounded shadow">
+          <p><strong>Date :</strong> {{ partie.date | date:'fullDate' }}</p>
+          <p><strong>Heure :</strong> {{ partie.heure }}</p>
+          <p><strong>Info :</strong> {{ partie.info }}</p>
+        </div>
+      </ng-container>
+    </div>
+  }
+  @else {
+    <p class="text-center">Aucune partie en cours.</p>
+  }
 </div>
 
 <div class="mt-8">
   <h2 class="text-2xl font-bold mb-4 text-center">Historique de partie</h2>
-  <div *ngIf="parties.length" class="space-y-4">
-    <ng-container *ngFor="let partie of parties">
-      <div *ngIf="partie.finished" class="border p-4 rounded shadow">
-        <p><strong>Date :</strong> {{ partie.date | date:'fullDate' }}</p>
-        <p><strong>Heure :</strong> {{ partie.heure }}</p>
-        <p><strong>Info :</strong> {{ partie.info }}</p>
-      </div>
-    </ng-container>
-  </div>
+  @if (parties.length > 0) {
+    <div  class="space-y-4">
+      <ng-container *ngFor="let partie of parties">
+        <div *ngIf="partie.finished" class="border p-4 rounded shadow">
+          <p><strong>Date :</strong> {{ partie.date | date:'fullDate' }}</p>
+          <p><strong>Heure :</strong> {{ partie.heure }}</p>
+          <p><strong>Info :</strong> {{ partie.info }}</p>
+        </div>
+      </ng-container>
+    </div>
+  }
+  @else {
+    <p class="text-center">Aucune partie dans l'historique.</p>
+  }
 </div>

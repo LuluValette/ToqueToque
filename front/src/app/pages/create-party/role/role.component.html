@@ -1,5 +1,15 @@
-<app-text text="{{ question }}" size="large"></app-text>
+<div class="min-h-[100svh] flex items-center">
 
-<app-button label="Non" color="secondary" size="medium" (clicked)="addParticipant('invité')"></app-button>
+  <div class="min-h-[30svh] flex flex-col gap-10 items-center">
 
-<app-button label="Oui" color="primary" size="medium" (clicked)="addParticipant('cuisinier')"></app-button>
+    <app-text text="{{ question }}" size="large"></app-text>
+
+    <div class="flex items-center gap-10">
+      <app-button label="Non" color="secondary" size="medium" (clicked)="addParticipant('invité')"></app-button>
+
+      <app-button label="Oui" color="primary" size="medium" (clicked)="addParticipant('cuisinier')"></app-button>
+    </div>
+
+  </div>
+
+</div>

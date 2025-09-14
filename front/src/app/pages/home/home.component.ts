@@ -29,17 +29,16 @@ export class HomeComponent {
 
   ngOnInit() {
     this.user = this.auth.getUser();
-    if (this.user) {
+    if (this.user != null) {
+      this.api.getUserParties(this.auth.getUser()._id).subscribe({
+        next: (data) => {
+          this.parties = data;
+        },
+        error: (err) => {
+          console.error('Erreur chargement parties', err);
+        }
+      });
     }
-
-    this.api.getUserParties(this.auth.getUser()._id).subscribe({
-      next: (data) => {
-        this.parties = data;
-      },
-      error: (err) => {
-        console.error('Erreur chargement parties', err);
-      }
-    });
   }
 
   createParty() {

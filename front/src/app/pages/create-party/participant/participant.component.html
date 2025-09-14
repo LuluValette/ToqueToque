@@ -1,37 +1,43 @@
-<div>
+<div class="min-h-[90vh] flex flex-col">
   <app-text text="Il est temps de choisir les participants !" size="large"></app-text>
-  <ul>
-    <li *ngFor="let participant of participants">
-      <app-card-with-button
-        *ngIf="participant.role === 'invité'"
-        [title]="participant.user.name"
-        image=""
-        [buttonLabel]="'Retirer'"
-        [buttonColor]="'danger'"
-        [buttonSize]="'small'"
-        (buttonClicked)="removeParticipant(participant.user._id)"
-      ></app-card-with-button>
 
-      <app-card-with-tiny-icon
-        *ngIf="participant.role === 'cuisinier'"
-        [title]="participant.user.name"
-        image=""
-        [buttonLabel]="'Retirer'"
-        [buttonColor]="'danger'"
-        [buttonSize]="'small'"
-        (buttonClicked)="removeParticipant(participant.user._id)"
-      ></app-card-with-tiny-icon>
-    </li>
-  </ul>
+  <div class="flex flex-col gap-4">
+    @for (participant of participants; track participant){
+      @if (participant.role === 'invité'){
+        <app-card-with-button
+          [title]="participant.user.name"
+          image=""
+          [buttonLabel]="'Retirer'"
+          [buttonColor]="'danger'"
+          [buttonSize]="'small'"
+          (buttonClicked)="removeParticipant(participant.user._id)"
+        ></app-card-with-button>
+      }
+      @if (participant.role === 'cuisinier'){
+        <app-card-with-tiny-icon
+          [title]="participant.user.name"
+          image=""
+          [buttonLabel]="'Retirer'"
+          [buttonColor]="'danger'"
+          [buttonSize]="'small'"
+          (buttonClicked)="removeParticipant(participant.user._id)"
+        ></app-card-with-tiny-icon>
+      }
+    }
 
-  <app-card-with-button
-    title="Chercher des amis"
-    image=""
-    [buttonLabel]="'Ajouter'"
-    [buttonColor]="'primary'"
-    [buttonSize]="'small'"
-    (buttonClicked)="gotoParticipant()"
-  ></app-card-with-button>
+    <app-card-with-button
+      title="Chercher des amis"
+      image=""
+      [buttonLabel]="'Ajouter'"
+      [buttonColor]="'primary'"
+      [buttonSize]="'small'"
+      (buttonClicked)="gotoParticipant()"
+    ></app-card-with-button>
+  </div>
 
-  <app-button label="Choisir les aliments" color="primary" size="medium" (clicked)="gotoaliment()"></app-button>
+  <div class="mt-auto p-6">
+    <div class="w-full flex justify-center">
+      <app-button label="Choisir les aliments" color="primary" size="medium" (clicked)="gotoaliment()"></app-button>
+    </div>
+  </div>
 </div>
