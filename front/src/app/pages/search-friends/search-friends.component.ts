@@ -28,14 +28,31 @@ export class SearchFriendsComponent {
     private auth: AuthService
   ) {}
 
-  ngOnInit(): void {
-    const meId = this.auth.getUser()._id; // peut être undefined au 1er cycle
-    this.api.getUsers().pipe(
-      map(users => users.filter(u => String(u._id) !== String(meId))),
-      tap(filtered => {
-        this.users = filtered;
-      })
-    ).subscribe();
+  async ngOnInit() {
+    const user = this.auth.getUser();
+    if(user == null) {
+      console.error('here User not logged in');
+      return;
+    }
+    const exclude = new Set<string>();
+    exclude.add(this.auth.getUser()._id)
+
+    // On attend que les deux appels soient terminés
+    const [friends, users] = await Promise.all([
+        this.api.getFriendsByUserId(this.auth.getUser()._id),
+        this.api.getUsers()
+    ]);
+
+    friends.subscribe(frs => {
+      frs.forEach((f: any) => exclude.add(String(f._id)));
+
+      users.subscribe(
+        usrs => {
+          this.users = usrs.filter(u => !exclude.has(String(u._id)));
+        }
+      );
+    });
+
   }
 
   onSearchChange() {
