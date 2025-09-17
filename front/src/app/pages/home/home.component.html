@@ -45,4 +45,10 @@
   @else {
     <p class="text-center">Aucune partie dans l'historique.</p>
   }
+
+  <app-popup
+    [open]="popupService.isOpen()"
+    [title]="popupService.getTitle()"
+    [message]="popupService.getMessage()">>
+  </app-popup>
 </div>
