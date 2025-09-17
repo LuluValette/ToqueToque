@@ -1,7 +1,13 @@
-<div *ngIf="recette">
-    <app-text text="{{ recette.title }}"></app-text>
-    
+@if (recette) {
+  <div class="h-[90vh] p-4 flex flex-col gap-4 max-w-xl mx-auto">
+    <app-text text="{{ recette.title }}" size="large"></app-text>
+
     <app-text text="{{ recette.description }}"></app-text>
-    
+
     <app-button label="J’ai terminé la recette" color="primary" size="small" link="/"></app-button>
-</div>
+  </div>
+} @else {
+  <div class="h-[100vh] flex justify-center items-center pb-[100px]">
+    <app-text text="Aucune recette trouvé"></app-text>
+  </div>
+}
