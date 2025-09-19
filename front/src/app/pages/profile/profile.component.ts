@@ -42,19 +42,6 @@ export class ProfileComponent {
     this.form.password = '';
   }
 
-  logout(): void {
-    this.auth.logout();
-    window.location.reload(); // Reload the page to reset the state
-  }
-
-  goToFriends(): void {
-    this.router.navigate(['/friends']);
-  }
-
-  searchFriends(): void {
-    this.router.navigate(['/search-friends']);
-  }
-
   submit(): void {
     const payload = {
       name: this.form.username,

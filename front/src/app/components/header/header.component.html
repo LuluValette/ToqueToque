@@ -2,11 +2,54 @@
         style="background-color: var(--primary-color); color: var(--background);">
 
   <button>back</button>
-  <h1 class="text-lg font-bold">ToqueToque</h1>
+  <button class="text-lg font-bold" (click)="goToMainPage()">ToqueToque</button>
 
   <div class="w-10 h-10 rounded-full border-2 border-white overflow-hidden">
-    <a [routerLink]="isLoggedIn ? '/profile' : '/login'">
+    <button (click)="toggleMenuUser()">
       <img src="picture/user-icon.png" alt="Utilisateur" class="w-full h-full object-cover">
-    </a>
+    </button>
+
+    @if(menuUserOpen) {
+      <div class="fixed inset-0 z-50" role="dialog" aria-modal="true">
+        <div class="absolute inset-0 bg-black/50"></div>
+
+        <!-- Dialog -->
+        <div class="absolute inset-0 grid place-items-center p-4" >
+          <div class="w-full max-w-sm rounded-2xl overflow-hidden
+                bg-[var(--background-color)] text-[var(--text-color)]
+                shadow-[0_0_20px_6px_var(--shadow-color)]">
+            <div class="p-5 space-y-4">
+              <!-- Header -->
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <img
+                    alt="Avatar" src="picture/user/{{ user._id}}.png" class="w-12 h-12 rounded-full object-cover border border-white/20">
+                  <div>
+                    <div class="font-semibold text-lg">{{ user.name }}</div>
+                    <div class="text-sm opacity-70">{{ user.phone }}</div>
+                  </div>
+                </div>
+                <button class="p-2 rounded-lg hover:bg-white/10" aria-label="Fermer" (click)="closeMenuUser()">✕</button>
+              </div>
+
+              <hr class="border-white/10">
+
+              <!-- Actions -->
+              <div class="flex flex-col">
+                <button class="text-left px-3 py-2 rounded-lg hover:bg-white/10" (click)="goToProfile()">Voir le profil</button>
+                <button class="text-left px-3 py-2 rounded-lg hover:bg-white/10" (click)="goToInvitation()">Invitation partie</button>
+                <button class="text-left px-3 py-2 rounded-lg hover:bg-white/10" (click)="goToFriends()">Liste d'amis</button>
+                <button class="text-left px-3 py-2 rounded-lg hover:bg-white/10" (click)="goToSearchFriends()">Rechercher des amies</button>
+                <button class="text-left px-3 py-2 rounded-lg hover:bg-white/10 text-red-400" (click)="logout()">Déconnexion</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+
   </div>
+
+
+
 </header>
