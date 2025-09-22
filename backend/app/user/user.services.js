@@ -6,7 +6,8 @@ const UserModel = require('./user.model');
 const FriendModel = require('../relations/friendship.model');
 const AllergieModel = require('../allergy/allergy.model');
 const UserAllergieModel = require('../relations/user_allergy.model');
-const UserPartieModel = require('../relations/session_user.model'); // (renommera en session_userModel plus tard)
+const UserPartieModel = require('../relations/session_user.model');
+const SessionModel = require('../session/session.model');
 
 /* Utilitaires */
 function httpError(message, status = 400, extras) {
@@ -247,9 +248,12 @@ async function getParties(userId) {
     const user = await UserModel.findById(userId).lean();
     if (!user) throw httpError('Utilisateur non trouvé', 404);
 
-    const participations = await UserPartieModel.find({ user: userId }).populate('partie').lean();
-    return participations.map((p) => p.partie);
-    // Quand tu renommeras "partie" → "session", adapte en conséquence.
+    let participations =  await UserPartieModel.find({ user: userId })
+        .populate({path: 'session', select: '_id'})
+        .select('session -_id')
+        .lean();
+
+    return await SessionModel.find({ _id: { $in: participations.map(t => t.session._id) } }).lean();
 }
 
 module.exports = {

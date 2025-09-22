@@ -30,8 +30,11 @@ class RecipeController {
     }
 
     async sendInvitaion(req, res) {
+        const sessionId = req.params.id;
+        const UserId = req.body.userId;
+        const ingredientImpose = req.body.ingredientImpose;
         try {
-            const a = await service.sendInvitaion(req.params.id, req.body);
+            const a = await service.sendInvitation(sessionId, UserId, ingredientImpose);
             res.status(201).json(a);
         } catch (err) {
             sendError(res, err);

@@ -27,6 +27,6 @@ r.get('/:id/allergies', (req, res) => ctrl.getAllergie(req, res));
 r.delete('/:id/allergies/:allergyId', (req, res) => ctrl.deleteAllergie(req, res));
 
 // Route API pour les utilisateurs d'une partie
-r.get('/:id/parties', ctrl.getParties);
+r.get('/:id/sessions', ctrl.getParties);
 
 module.exports = r;

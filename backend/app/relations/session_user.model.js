@@ -1,19 +1,24 @@
 const mongoose = require('mongoose');
 
-const userPartieSchema = new mongoose.Schema({
+const userSessionSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
   },
-  partie: {
+  session: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Partie',
+    ref: 'Session',
     required: true
   },
   ingredientImpose: {
     type: String,
     default: null
+  },
+  status: {
+    type: String,
+    enum: ['invited', 'accepted', 'rejected'],
+    default: 'invited'
   },
   createdAt: {
     type: Date,
@@ -21,8 +26,8 @@ const userPartieSchema = new mongoose.Schema({
   }
 });
 
-// 🔐 Un utilisateur ne peut participer qu'une fois à une même partie
-userPartieSchema.index({ user: 1, partie: 1 }, { unique: true });
+// 🔐 Un utilisateur ne peut participer qu'une fois à une même session
+userSessionSchema.index({ user: 1, session: 1 }, { unique: true });
 
-const UserPartieModel = mongoose.model('UserPartie', userPartieSchema);
-module.exports = UserPartieModel;
+const UserSessionModel = mongoose.model('UserSession', userSessionSchema);
+module.exports = UserSessionModel;

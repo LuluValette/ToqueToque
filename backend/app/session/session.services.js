@@ -6,6 +6,7 @@ const SessionModel = require('./session.model');
 const UserModel = require('../user/user.model');
 const SessionUserModel = require('../relations/session_user.model');
 const NotationModel = require('../relations/notation.model');
+const AlimentModel = require('../aliment/aliment.model');
 
 function httpError(message, status = 400, extras) {
     const e = new Error(message);
@@ -28,6 +29,7 @@ async function create(payload = {}) {
     if (!user) throw httpError('Utilisateur initiateur non trouvé', 404);
 
     const session = await SessionModel.create({ date, heure, info, initiator });
+
     return session.toObject ? session.toObject() : session;
 }
 
@@ -100,14 +102,16 @@ async function remove(id, { force = false } = {}) {
 
 /* ---------------------- Joueurs (Users d’une session) ------------------- */
 
-async function sendInvitation(sessionId, userId) {
+async function sendInvitation(sessionId, userId, ingredientImpose) {
     // vérifs d’existence
-    const [session, user] = await Promise.all([
+    const [session, user, ingredient] = await Promise.all([
         SessionModel.findById(sessionId).lean(),
         UserModel.findById(userId).lean(),
+        AlimentModel.findById(ingredientImpose).lean(),
     ]);
     if (!session) throw httpError('Session non trouvée', 404);
     if (!user) throw httpError('Utilisateur non trouvé', 404);
+    if (!ingredient) throw httpError('Ingrédient imposé non trouvé', 404);
 
     const link = await SessionUserModel.findOne({ session: sessionId, user: userId }).lean();
 
@@ -117,12 +121,9 @@ async function sendInvitation(sessionId, userId) {
         // status === 'rejected' → on autorise la ré-invitation
     }
 
-    // upsert en "invited"
-    const updated = await SessionUserModel.findOneAndUpdate(
-        { session: sessionId, user: userId },
-        { $set: { status: 'invited' } },
-        { upsert: true, new: true }
-    ).lean();
+    const updated = await SessionUserModel.create(
+        { session: sessionId, user: userId, ingredientImpose: ingredientImpose, status: 'invited' });
+    if (!updated) throw httpError('Erreur lors de l\'envoi de l\'invitation', 500);
 
     return updated;
 }
