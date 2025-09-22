@@ -29,7 +29,7 @@ export class InfoComponent {
     this.date = this.partieBuilder.get('date');
     this.heure = this.partieBuilder.get('heure');
 
-    this.partieBuilder.set('initiator', 'John Doe');
+    this.partieBuilder.set('initiator', this.user._id);
   }
 
   nextStep() {

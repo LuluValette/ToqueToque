@@ -40,11 +40,11 @@ export class ApiService {
   }
 
   createPartie(payload: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/parties`, payload);
+    return this.http.post(`${this.apiUrl}/sessions`, payload);
   }
 
   joinPartie(partieId: string, payload: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/parties/${partieId}/join`, payload);
+    return this.http.post(`${this.apiUrl}/sessions/${partieId}/join`, payload);
   }
 
   updateUserInfo(userId: string, data: { name: string; phone: string; password: string }): Observable<any> {
@@ -71,7 +71,7 @@ export class ApiService {
 
   // api.service.ts
   getUserParties(userId: string) {
-    return this.http.get<any[]>(`${this.apiUrl}/users/${userId}/parties`);
+    return this.http.get<any[]>(`${this.apiUrl}/users/${userId}/sessions`);
   }
 
 }

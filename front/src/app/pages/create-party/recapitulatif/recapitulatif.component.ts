@@ -65,21 +65,21 @@ export class RecapitulatifComponent {
       date: '20200101',
       heure: '1200',
       info: '',
-      initiator: '681a007acc93656646159643'
+      initiator: this.partieBuilder.get('initiator'),
     };
 
     this.api.createPartie(partiePayload).subscribe({
       next: (partie: any) => {
         const partieId = partie._id;
 
-        const joinRequests = this.participants.map(p =>
+        const joinRequests = this.partieBuilder.getParticipantAndIngredientShuffled().map((p: { participant: any; ingredient: any; }) =>
           this.api.joinPartie(partieId, {
-            userId: p.user._id,
-            ingredientImpose: p.ingredientImpose
+            userId: p.participant.user._id,
+            ingredientImpose: p.ingredient._id
           })
         );
 
-        Promise.all(joinRequests.map(obs => obs.toPromise()))
+        Promise.all(joinRequests.map((obs: { toPromise: () => any; }) => obs.toPromise()))
           .then(() => {
             console.log('Partie créée et joueurs assignés');
             this.router.navigate(['/']);

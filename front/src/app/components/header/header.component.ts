@@ -66,6 +66,7 @@ export class HeaderComponent {
   }
 
   goToInvitation(): void {
+    this.router.navigate(['/invitation-party']);
     this.closeMenuUser();
   }
 }

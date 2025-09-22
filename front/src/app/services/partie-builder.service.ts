@@ -88,4 +88,36 @@ export class PartieBuilderService {
     this.partieData.ingredients = ingredients.filter((i: any) => i._id !== ingredientId);
   }
 
+  getParticipantAndIngredientShuffled() {
+
+      // on récupère les participants qui on le role de cuisinier
+      const participants = (this.get('participants') || []).filter((p: { role: string; }) => p.role === 'cuisinier');
+      const ingredients = this.get('ingredients') || [];
+
+      // On mélange les ingrédients
+      const shuffledIngredients = [...ingredients].sort(() => Math.random() - 0.5);
+
+      // On assigne les ingrédients aux participants
+      let assignments = participants.map((participant: any, index: number) => {
+        return {
+          participant,
+          ingredient: shuffledIngredients[index % shuffledIngredients.length] || null
+        };
+      });
+
+      // Maintenant on récupere les participants sans le role de cuisinier
+      const autresParticipants = (this.get('participants') || []).filter((p: { role: string; }) => p.role !== 'cuisinier');
+
+      // On ajoute les autres participants à la liste des assignments sans ingrédient
+      autresParticipants.forEach((participant: any) => {
+        assignments.push({
+          participant,
+          ingredient: 0
+        });
+      });
+
+      return assignments;
+
+    }
+
 }
