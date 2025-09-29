@@ -12,7 +12,8 @@ const userSessionSchema = new mongoose.Schema({
     required: true
   },
   ingredientImpose: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Aliment',
     default: null
   },
   status: {

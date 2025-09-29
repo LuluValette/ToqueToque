@@ -41,9 +41,9 @@ class RecipeController {
         }
     }
 
-    async accepteInvitation(req, res) {
+    async acceptInvitation(req, res) {
         try {
-            const a = await service.accepteInvitation(req.params.id, req.body);
+            const a = await service.acceptInvitation(req.params.id, req.body.userId);
             res.status(200).json(a);
         } catch (err) {
             sendError(res, err);
@@ -61,7 +61,7 @@ class RecipeController {
 
     async getInvitation(req, res) {
         try {
-            const a = await service.getInvitation(req.body);
+            const a = await service.getInvitation(req.params.id);
             res.json(a);
         } catch (err) {
             sendError(res, err);

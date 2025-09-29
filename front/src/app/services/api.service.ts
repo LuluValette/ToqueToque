@@ -74,4 +74,22 @@ export class ApiService {
     return this.http.get<any[]>(`${this.apiUrl}/users/${userId}/sessions`);
   }
 
+  getInvitations(userId: string) {
+    return this.http.get<any[]>(`${this.apiUrl}/sessions/${userId}/invitations`);
+  }
+
+  getSessionInfo(sessionId: string) {
+    return this.http.get<any>(`${this.apiUrl}/sessions/${sessionId}`);
+  }
+
+  getParticipantsSession(sessionId: string) {
+    return this.http.get<any[]>(`${this.apiUrl}/sessions/${sessionId}/users`);
+  }
+
+  acceptInvitation(sessionId: string, userId: string) {
+    return this.http.put(`${this.apiUrl}/sessions/${sessionId}/accept`, {
+      userId : userId
+    });
+  }
+
 }

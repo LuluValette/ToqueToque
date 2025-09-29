@@ -1,1 +1,13 @@
-<p>invitation-party works!</p>
+@if(invitations){
+  @for(invitation of invitations; track invitation){
+    <app-card-with-button
+    title="{{invitation.session.initiator.name}} invited you to a session"
+    buttonLabel="View Invitation"
+    (buttonClicked)="viewInvitation(invitation.session._id)">
+
+    </app-card-with-button>
+  }
+}
+@else{
+  <h1>No invitations available</h1>
+}

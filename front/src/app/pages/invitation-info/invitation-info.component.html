@@ -1,0 +1,35 @@
+<app-text
+  text="{{ invitationPhrase }}"
+></app-text>
+
+<app-text
+  text="{{ info }}"
+></app-text>
+
+<app-text
+  text="Voici votre ingrédient impose pour cette session"
+></app-text>
+
+<app-card-simple
+  image="{{ IngredientsImpose.image }}"
+  title="{{ IngredientsImpose.name }}"
+></app-card-simple>
+
+
+<app-text text="Liste des participants"></app-text>
+
+@for (participant of participants; track participants){
+  <app-card-simple
+    title="{{ participant.name }}"
+  ></app-card-simple>
+}
+
+<app-button
+  label="Accepter l'invitation"
+  (click)="acceptInvitation()"
+></app-button>
+
+<app-button
+  label="Refuser l'invitation"
+  color="danger"
+></app-button>

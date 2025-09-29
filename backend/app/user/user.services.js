@@ -248,7 +248,7 @@ async function getParties(userId) {
     const user = await UserModel.findById(userId).lean();
     if (!user) throw httpError('Utilisateur non trouvé', 404);
 
-    let participations =  await UserPartieModel.find({ user: userId })
+    let participations =  await UserPartieModel.find({ user: userId, status: 'accepted' })
         .populate({path: 'session', select: '_id'})
         .select('session -_id')
         .lean();

@@ -19,6 +19,7 @@ import {RegistrationComponent} from './pages/registration/registration.component
 import {FriendListComponent} from './pages/friend-list/friend-list.component';
 import {SearchFriendsComponent} from './pages/search-friends/search-friends.component';
 import {InvitationPartyComponent} from './pages/invitation-party/invitation-party.component';
+import {InvitationInfoComponent} from './pages/invitation-info/invitation-info.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -29,6 +30,7 @@ export const routes: Routes = [
     { path: 'friends', component: FriendListComponent },
     { path: 'search-friends', component: SearchFriendsComponent },
     { path: 'invitation-party', component: InvitationPartyComponent},
+    { path: 'invitation/:id', component: InvitationInfoComponent},
 
     { path: 'recettes', component: RecettesComponent },
     { path: 'recettes/:id', component: RecettesIngredientsComponent },

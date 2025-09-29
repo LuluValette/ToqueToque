@@ -45,7 +45,10 @@ async function get(id) {
     let s;
     try {
         s = await SessionModel.findById(id)
-            .populate('initiator', 'name')
+            .populate({
+                path: 'initiator',
+                select: 'name'
+            })
             .lean();
     }
     catch (err) {
@@ -176,25 +179,30 @@ async function getInvitation(userId) {
         user: userId,
         status: 'invited',
     })
-        .populate({ path: 'session', select: 'date heure info initiator', populate: { path: 'initiator', select: 'name' } })
+        .populate({
+            path: 'session',
+            select: 'date heure info initiator',
+            populate: {
+                path: 'initiator',
+                select: 'name'
+            },
+
+        })
         .sort({ createdAt: -1 })
         .lean();
 
     // tu peux retourner directement les liens, ou ne renvoyer que les sessions :
-    return invitations.map(inv => ({
-        session: inv.session,
-        status: inv.status,
-        invitedAt: inv.createdAt,
-    }));
+    return invitations;
 }
 
-async function listUsers(sessionId) {
+async function getParticipants(sessionId) {
     const session = await SessionModel.findById(sessionId).lean();
     if (!session) throw httpError('Session non trouvée', 404);
 
     const participations = await SessionUserModel
         .find({ session: sessionId })
         .populate('user', 'name')
+        .populate('ingredientImpose', 'name image')
         .lean();
 
     return participations.map(p => ({
@@ -262,7 +270,7 @@ module.exports = {
     acceptInvitation,
     rejectInvitation,
     getInvitation,
-    listUsers,
+    getParticipants,
     // notes
     addNotation,
     listNotations,
