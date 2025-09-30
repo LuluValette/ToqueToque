@@ -20,6 +20,7 @@ import {FriendListComponent} from './pages/friend-list/friend-list.component';
 import {SearchFriendsComponent} from './pages/search-friends/search-friends.component';
 import {InvitationPartyComponent} from './pages/invitation-party/invitation-party.component';
 import {InvitationInfoComponent} from './pages/invitation-info/invitation-info.component';
+import {PartyInfoComponent} from './pages/party-info/party-info.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -44,5 +45,7 @@ export const routes: Routes = [
     { path: 'create-party/aliment', component: AlimentComponent },
     { path: 'create-party/recherche-aliment', component: RechercheAlimentComponent },
     { path: 'create-party/recapitulatif', component: RecapitulatifComponent },
+
+    { path: 'party/:id', component: PartyInfoComponent}
 
 ];

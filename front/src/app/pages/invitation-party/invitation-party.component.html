@@ -1,4 +1,4 @@
-@if(invitations){
+@if(invitations.length > 0){
   @for(invitation of invitations; track invitation){
     <app-card-with-button
     title="{{invitation.session.initiator.name}} invited you to a session"

@@ -1,0 +1,41 @@
+<app-text
+  text="Bienvenue à la fête ! Voici les détails de l'événement :">
+
+</app-text>
+
+
+<app-text
+  text="{{ info }}"
+></app-text>
+
+<app-text
+  text="Voici votre ingrédient impose pour cette session"
+></app-text>
+
+@if (IngredientsImpose) {
+  <app-card-simple
+    image="{{ IngredientsImpose.image }}"
+    title="{{ IngredientsImpose.name }}"
+  ></app-card-simple>
+}
+
+<app-text text="Liste des participants"></app-text>
+
+@for (participant of participants; track participants){
+  <app-card-simple
+    title="{{ participant.name }}"
+  ></app-card-simple>
+}
+
+@if(isInitiator) {
+  <app-button
+    label="Démarrer la fête"
+    (click)="startParty()"
+  ></app-button>
+}@else {
+  <app-button
+    label="Quitter la fête"
+    color="danger"
+    (click)="leaveParty()"
+  ></app-button>
+}

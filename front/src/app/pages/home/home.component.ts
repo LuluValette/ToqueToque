@@ -53,4 +53,8 @@ export class HomeComponent {
     // On redirige vers la page suivante
     this.router.navigate(['/create-party']);
   }
+
+  goToParty(id: string) {
+    this.router.navigate(['/party', id]);
+  }
 }

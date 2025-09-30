@@ -10,11 +10,12 @@
   text="Voici votre ingrédient impose pour cette session"
 ></app-text>
 
+@if (IngredientsImpose) {
 <app-card-simple
   image="{{ IngredientsImpose.image }}"
   title="{{ IngredientsImpose.name }}"
-></app-card-simple>
-
+    ></app-card-simple>
+}
 
 <app-text text="Liste des participants"></app-text>
 
