@@ -23,6 +23,10 @@ import {InvitationInfoComponent} from './pages/invitation-info/invitation-info.c
 import {PartyInfoComponent} from './pages/party-info/party-info.component';
 import {PartyRoomComponent} from './pages/party-room/party-room.component';
 import {PartyReadyComponent} from './pages/party-ready/party-ready.component';
+import {PreNotationComponent} from './pages/pre-notation/pre-notation.component';
+import {ScoreComponent} from './pages/score/score.component';
+import {NotationComponent} from './pages/notation/notation.component';
+import {PostNotationComponent} from './pages/post-notation/post-notation.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -50,6 +54,9 @@ export const routes: Routes = [
 
     { path: 'party/:id', component: PartyInfoComponent},
     { path: 'party-room/:id', component: PartyRoomComponent },
-    { path: 'party-ready/:id', component: PartyReadyComponent }
-
+    { path: 'party-ready/:id', component: PartyReadyComponent },
+    { path: 'party/preNotation/:id', component: PreNotationComponent},
+    { path: 'party/notation/:id', component: NotationComponent},
+    { path: 'party/postNotation/:id', component: PostNotationComponent},
+    { path: 'party/score/:id', component: ScoreComponent},
 ];
