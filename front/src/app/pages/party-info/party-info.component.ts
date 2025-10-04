@@ -22,6 +22,7 @@ export class PartyInfoComponent {
   @Input() participants: any[] = [];
   @Input() IngredientsImpose: any = null;
   @Input() isInitiator: boolean = false;
+  @Input() launch: boolean = false;
 
   constructor(
     private router: Router,
@@ -37,6 +38,7 @@ export class PartyInfoComponent {
     this.api.getSessionInfo(id).subscribe((data: any) => {
       this.invitationPhrase = data.initiator.name + " vous invite à rejoindre une partie de le " + new Date(data.date).toLocaleDateString() + " à " + new Date(data.heure).toLocaleTimeString();
       this.info = data.info;
+      if(data.status == "inProgress") this.launch = true;
       if(data.initiator._id == user._id) this.isInitiator = true;
     });
 
@@ -51,10 +53,17 @@ export class PartyInfoComponent {
   }
 
   startParty() {
-
+    this.api.lauchSession(this.route.snapshot.paramMap.get('id') || '').subscribe({
+      next: (data) => {
+        this.router.navigate(['/party-room', this.route.snapshot.paramMap.get('id')]);
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
   }
 
-  leaveParty() {
-
+  goToSalon() {
+    this.router.navigate(['/party-room', this.route.snapshot.paramMap.get('id')]);
   }
 }

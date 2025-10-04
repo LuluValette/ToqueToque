@@ -95,6 +95,24 @@ class RecipeController {
         }
     }
 
+    async launch(req, res) {
+        try {
+            const a = await service.launch(req.params.id);
+            res.status(200).json(a);
+        } catch (err) {
+            sendError(res, err);
+        }
+    }
+
+    async finish(req, res) {
+        try {
+            const a = await service.finish(req.params.id);
+            res.status(200).json(a);
+        } catch (err) {
+            sendError(res, err);
+        }
+    }
+
 }
 
 module.exports = new RecipeController();

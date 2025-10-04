@@ -103,6 +103,34 @@ async function remove(id, { force = false } = {}) {
     return deleted;
 }
 
+/* ---------------------- Gestion du status de la partie ----------------------------- */
+
+async function launch(id) {
+    const updated = await SessionModel.findByIdAndUpdate(
+        id,
+        { $set: { status: 'inProgress' } },
+        { new: true, runValidators: true }
+    ).lean();
+    if (!updated) throw httpError('Session non trouvée', 404);
+    if (updated.status !== 'inProgress') {
+        throw httpError('Impossible de lancer la session', 400);
+    }
+    return updated;
+}
+
+async function finish(id) {
+    const updated = await SessionModel.findByIdAndUpdate(
+        id,
+        { $set: { status: 'finished' } },
+        { new: true, runValidators: true }
+    ).lean();
+    if (!updated) throw httpError('Session non trouvée', 404);
+    if (updated.status !== 'finished') {
+        throw httpError('Impossible de terminer la session', 400);
+    }
+    return updated;
+}
+
 /* ---------------------- Joueurs (Users d’une session) ------------------- */
 
 async function sendInvitation(sessionId, userId, ingredientImpose) {
@@ -265,6 +293,9 @@ module.exports = {
     get,
     update,
     remove,
+    // status
+    launch,
+    finish,
     // players
     sendInvitation,
     acceptInvitation,

@@ -21,6 +21,8 @@ import {SearchFriendsComponent} from './pages/search-friends/search-friends.comp
 import {InvitationPartyComponent} from './pages/invitation-party/invitation-party.component';
 import {InvitationInfoComponent} from './pages/invitation-info/invitation-info.component';
 import {PartyInfoComponent} from './pages/party-info/party-info.component';
+import {PartyRoomComponent} from './pages/party-room/party-room.component';
+import {PartyReadyComponent} from './pages/party-ready/party-ready.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -46,6 +48,8 @@ export const routes: Routes = [
     { path: 'create-party/recherche-aliment', component: RechercheAlimentComponent },
     { path: 'create-party/recapitulatif', component: RecapitulatifComponent },
 
-    { path: 'party/:id', component: PartyInfoComponent}
+    { path: 'party/:id', component: PartyInfoComponent},
+    { path: 'party-room/:id', component: PartyRoomComponent },
+    { path: 'party-ready/:id', component: PartyReadyComponent }
 
 ];

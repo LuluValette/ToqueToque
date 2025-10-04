@@ -1,0 +1,27 @@
+@if (IngredientsImpose) {
+  <app-text text="Tu devras donc préparer un plat à base de {{ IngredientsImpose.name }} !"></app-text>
+
+  <app-card-simple
+    image="{{ IngredientsImpose.image }}"
+    title="{{ IngredientsImpose.name }}"
+  ></app-card-simple>
+}
+
+<app-text text="Attention ! Attends d’être chez {{ inittiatorName }} pour préparer ta recette !"></app-text>
+
+<app-text text="Prends le temps d’aller acheter tes ingrédients pour ta préparation"></app-text>
+
+<app-text text="En manque d’inspiration ?"></app-text>
+
+<app-button
+  label="Idées de recetes"
+  color="secondary"
+></app-button>
+
+<app-text text="Envie de gagner plus de points ?\n
+Fais ta propre recette !"></app-text>
+
+<app-button
+  label="Mes ingrédients sont achetés"
+  (click)="goToSalon()"
+></app-button>

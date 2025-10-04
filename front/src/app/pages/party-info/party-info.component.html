@@ -27,15 +27,16 @@
   ></app-card-simple>
 }
 
-@if(isInitiator) {
+@if(isInitiator && !launch){
   <app-button
     label="Démarrer la fête"
     (click)="startParty()"
   ></app-button>
-}@else {
+}
+
+@if(launch){
   <app-button
-    label="Quitter la fête"
-    color="danger"
-    (click)="leaveParty()"
+  label="Acceder au salon"
+  (click)="goToSalon()"
   ></app-button>
 }

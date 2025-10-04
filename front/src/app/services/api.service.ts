@@ -92,4 +92,18 @@ export class ApiService {
     });
   }
 
+  declineInvitation(sessionId: string, userId: string) {
+    return this.http.put(`${this.apiUrl}/sessions/${sessionId}/reject`, {
+      userId : userId
+    });
+  }
+
+  lauchSession(sessionId: string) {
+    return this.http.put(`${this.apiUrl}/sessions/${sessionId}/launch`, {});
+  }
+
+  finishSession(sessionId: string) {
+    return this.http.put(`${this.apiUrl}/sessions/${sessionId}/finish`, {});
+  }
+
 }

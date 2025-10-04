@@ -18,9 +18,10 @@ const sessionSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
-    finished: {
-        type: Boolean,
-        default: false
+    status: {
+        type: String,
+        enum: ['pending', 'inProgress', 'finished'],
+        default: 'pending',
     },
     createdAt: {
         type: Date,
